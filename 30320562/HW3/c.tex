@@ -1,0 +1,209 @@
+\documentclass[]{article}
+\usepackage{ctex}
+\usepackage{amsmath}        %数学公式
+\usepackage{cases}          %联立编号
+\usepackage{cite}           %引用
+% \usepackage{enumitem}       %编号
+
+\usepackage{graphicx}       %插入图片
+\usepackage{float}          %设置图片浮动位置
+\usepackage{subfigure}      %插入多图时用子图显示
+
+\usepackage{anyfontsize}    %解决一个奇怪的字体大小报错问题
+\usepackage{fancyhdr}       %页眉、页脚、页码
+\usepackage[a4paper, margin=1in]{geometry}    %纸张大小
+
+\newcommand\f[2]{\frac{#1}{#2}}
+\newcommand\pf[2]{\frac{\partial#1}{\partial#2}}
+\newcommand\df[2]{\dfrac{#1}{#2}}
+\newcommand\pdf[2]{\dfrac{\partial#1}{\partial#2}}
+\newcommand\zsin[1]{\frac{e^{i#1}-e^{-i#1}}{2i}}
+\newcommand\zdsin[1]{\dfrac{e^{i#1}-e^{-i#1}}{2i}}
+\newcommand\zcos[1]{\frac{e^{i#1}+e^{-i#1}}{2i}}
+\newcommand\zdcos[1]{\dfrac{e^{i#1}+e^{-i#1}}{2i}}
+\newcommand\zline[1]{#1-\overline{#1}}
+
+\newcommand\dg[2]{#1^{\circ}#2'}
+
+\setlength{\headheight}{16pt}
+\pagestyle{fancy}
+\fancyhf{}
+
+
+\title{决策方法论 - HW3}
+\author{\LaTeX\ by\ Jerry\ }
+\date{\today}
+\pagenumbering{arabic}
+
+\begin{document}
+
+\fancyhead[L]{Jerry}
+\fancyhead[C]{决策方法论 - HW3}
+\fancyfoot[C]{\thepage}
+
+\section{试解释似然性（Likelihood）与概率（Probability）的区别}
+
+似然性（Likelihood）和概率（Probability）这两个概念在统计学中都非常重要，但它们指的是不同的概念，适用于不同的情况。
+
+概率描述的是在已知一些参数的情况下，一个或多个事件发生的可能性。它是对未来事件发生的不确定性的度量。比如，如果我们知道一枚公平的硬币，那么我们可以说它正面朝上的概率是50\%。
+
+而似然性是在给定某些数据时，不同参数值的支持度或合理性的度量。它不是对事件发生的预测，而是一种在已经观察到事件之后，评估不同参数情况可能性的方式。如果我们观察到一枚硬币扔了100次，其中正面朝上70次，似然函数将帮助我们评估这是一枚公平硬币的可能性。
+
+从数学角度来看，概率是在给定参数的情况下，数据的函数；而似然性是在给定数据的情况下，参数的函数。即：
+
+\begin{itemize}
+    \item 概率（Probability）：$P(Data | Parameters)$，给定参数求数据的概率。
+    \item 似然性（Likelihood）：$L(Parameters | Data)$，给定数据求参数的似然性。
+\end{itemize}
+
+因此，似然性和概率虽然在形式上看起来很相似，但似然性是用来在已知数据的情况下评估和比较不同模型参数的，而概率是用来预测在已知模型参数的情况下，某个或某些特定事件发生的可能性。
+
+\section{试解释最大似然估计（Maximum Likelihood Estimation）的概念}
+
+最大似然估计（Maximum Likelihood Estimation, MLE）是一种在统计模型中估计模型参数的方法。最大似然估计的核心思想是选择使得观察到的数据出现概率（似然性）最大的参数值。换句话说，它寻找的参数值能最大程度地“解释”观察到的数据。
+
+在数学上，最大似然估计涉及到似然函数，这是一个关于参数的函数，表示在这些参数下观察到当前数据的概率。MLE的过程如下：
+
+\begin{enumerate}
+    \item 建立模型：首先确定一个包含未知参数的概率模型。这个模型是用来描述数据生成过程的。
+    \item 定义似然函数：接着定义一个似然函数，这个函数是未知参数的函数，表示在不同参数值下得到实际观测数据的概率。
+    \item 计算最大似然函数：然后，找到一个参数值（或一组参数值），使得这个似然函数达到最大值。这就是所谓的最大似然估计。
+    \item 求解参数：为了找到使似然函数最大化的参数值，我们通常需要对似然函数进行求导，并解出导数等于零的点。这些点即为似然函数的极值点。在许多情况下，这个极值点就是全局最大值。
+\end{enumerate}
+
+最大似然估计是一种非常通用的估计方法，它在许多统计模型中都是可行的，尤其是在模型是良定义的概率模型时。MLE估计的一个重要性质是它在很多情况下是一致的（consistency），即随着样本量的增加，估计值会收敛至真实的参数值。此外，如果条件允许，MLE估计还可以是有效的（efficiency），即在所有无偏估计中具有最小的方差。
+
+\section{假设进行 $n$ 次抛硬币伯努利试验，记正面为 $1$、反面为 $0$，则有 $n$ 个伯努利随机变量 $X_1$，$X_2$，…，$X_n$，设正面出现的概率为 $\pi$，设 $n$ 次实验的结果为（$x_1$，$x_2$，…，$x_n$），$x_i$ 为 $0$ 或者 $1$。}
+
+\subsection{请写出随机变量 $X_i$ 的概率质量}
+
+随机变量 $X_i$ 的概率质量为：
+
+$$P(X_i=x_i)=\pi^{x_i}(1-\pi)^{1-x_i}$$
+
+\subsection{请写出 $n$ 次实验的对数形式的似然函数 $L(\pi)=\log(f(x_1,x_2,...,x_n;\pi))$ }
+
+$n$ 次实验的对数形式的似然函数为：
+
+\begin{equation}
+    \begin{aligned}
+        L(\pi)
+        &=\log(f(x_1,x_2,...,x_n;\pi))\\
+        &=\log(\prod_{i=1}^n\pi^{x_i}(1-\pi)^{1-x_i})\\
+        &=\sum_{i=1}^n\log(\pi^{x_i}(1-\pi)^{1-x_i})\\
+        &=\sum_{i=1}^n(x_i\log\pi+(1-x_i)\log(1-\pi))\\
+        &=\sum_{i=1}^nx_i\log\pi+\sum_{i=1}^n(1-x_i)\log(1-\pi)\\
+    \end{aligned}
+\end{equation}
+
+\subsection{请推导出对的 $\pi$ 最大似然估计（Maximum Likelihood Estimation）$\hat{\pi}$ }
+
+对似然函数求导，令导数为零，得：
+
+\begin{equation}
+    \begin{aligned}
+        \pdf{L(\pi)}{\pi}
+        &=\pdf{}{\pi}(\sum_{i=1}^nx_i\log\pi+\sum_{i=1}^n(1-x_i)\log(1-\pi))\\
+        &=\sum_{i=1}^n\pdf{}{\pi}(x_i\log\pi+(1-x_i)\log(1-\pi))\\
+        &=\sum_{i=1}^n(x_i\pdf{}{\pi}\log\pi+(1-x_i)\pdf{}{\pi}\log(1-\pi))\\
+        &=\sum_{i=1}^n(x_i\df{1}{\pi}+(1-x_i)\df{-1}{1-\pi})\\
+        &=\sum_{i=1}^n(\df{x_i}{\pi}-\df{1-x_i}{1-\pi})\\
+        &=\sum_{i=1}^n(\df{x_i-\pi}{\pi(1-\pi)})\\
+        &=0\\
+    \end{aligned}
+\end{equation}
+
+解得：
+
+$$\hat{\pi}=\df{\sum_{i=1}^nx_i}{n}$$
+
+\subsection{试推导出最大似然估计 $\hat{\pi}$ 的方差 Var($\hat{\pi}$)}
+
+\begin{equation}
+    \begin{aligned}
+        Var(\hat{\pi})
+        &=Var(\df{\sum_{i=1}^nx_i}{n})\\
+        &=\df{1}{n^2}Var(\sum_{i=1}^nx_i)\\
+        &=\df{1}{n^2}\sum_{i=1}^nVar(x_i)\\
+        &=\df{1}{n^2}\sum_{i=1}^n\pi(1-\pi)\\
+        &=\df{1}{n^2}n\pi(1-\pi)\\
+        &=\df{\pi(1-\pi)}{n}\\
+    \end{aligned}
+\end{equation}
+
+\subsection{抛 5 次硬币，4 次为正面，1 次为背面，求最大似然估计 $\hat{\pi}$ 及其方差 Var($\hat{\pi}$) ；抛 500 次硬币，400 次为正面，100 次为背面，求最大似然估计 $\hat{\pi}$ 及其方差 Var($\hat{\pi}$) }
+
+\subsubsection{抛 5 次硬币，4 次为正面，1 次为背面}
+
+$$\hat{\pi}=\df{\sum_{i=1}^nx_i}{n}=\df{4}{5}=0.8$$
+
+$$Var(\hat{\pi})=\df{\pi(1-\pi)}{n}=\df{0.8\times0.2}{5}=0.032$$
+
+\subsubsection{抛 500 次硬币，400 次为正面，100 次为背面}
+
+$$\hat{\pi}=\df{\sum_{i=1}^nx_i}{n}=\df{400}{500}=0.8$$
+
+$$Var(\hat{\pi})=\df{\pi(1-\pi)}{n}=\df{0.8\times0.2}{500}=0.00032$$
+
+\section{中国与阿根廷乒乓球国家队举行比赛，设中国队取胜的概率 $P$=0.95，那么}
+
+\subsection{中国队取胜的发生比（odds）为多少？对数发生比为多少？}
+
+中国队取胜的发生比（odds）为：
+
+$$\df{P}{1-P}=\df{0.95}{1-0.95}=19$$
+
+对数发生比为：
+
+$$\log(\df{P}{1-P})=\log(\df{0.95}{1-0.95})=\log(19)=2.944$$
+
+\subsection{试解释在广义线性模型中使用对数发生比对的优势}
+
+在广义线性模型中使用对数发生比对的优势是，它可以将发生比的线性组合转化为对数发生比的线性组合，从而使得模型的形式更加简洁。
+
+\section{设 $Y_i$ 为服从泊松分布的独立随机变量，期望为 $\mu_i$，广义线性模型表示为 $$\log(\mu_i)=\beta_0+\beta_1x_i$$ 其中 $x_i$ 和 $y_i$ 为获得的观测样本值，$x_i$ 为自变量，$y_i$ 为因变量，即随机变量 $Y_i$ 的取值，$i=1,2,...,n$，$n$为总样本数 }
+
+\subsection{请分别解释广义线性模型的随机成分、系统性成分、链接函数是什么}
+
+\begin{itemize}
+    \item 随机成分：随机成分是指模型中的因变量 $Y_i$，它是一个随机变量，服从某种概率分布。
+    \item 系统性成分：系统性成分是指模型中的自变量 $x_i$，它是一个确定的变量。
+    \item 链接函数：链接函数是指将随机成分和系统性成分联系起来的函数，它是一个单调可微函数。
+\end{itemize}
+
+\subsection{设 $\beta=(\beta_0\ \ \ \ \beta_1)^T$ ，请写出对数形式的似然函数 $L(\beta)=\log(f(y_1,y_2,...,y_n;\beta))$}
+
+\begin{equation}
+    \begin{aligned}
+        L(\beta)
+        &=\log(f(y_1,y_2,...,y_n;\beta))\\
+        &=\log(\prod_{i=1}^nf(y_i;\beta))\\
+        &=\sum_{i=1}^n\log(f(y_i;\beta))\\
+        &=\sum_{i=1}^n\log(\df{e^{-\mu_i}\mu_i^{y_i}}{y_i!})\\
+        &=\sum_{i=1}^n(-\mu_i+y_i\log\mu_i-\log(y_i!))\\
+        &=\sum_{i=1}^n(-e^{\beta_0+\beta_1x_i}+y_i(\beta_0+\beta_1x_i)-\log(y_i!))\\
+    \end{aligned}
+\end{equation}
+
+\subsection{请写出对模型参数 $\hat{\beta}=(\hat{\beta_0}\ \ \ \ \hat{\beta_1})^T$ 的最大似然估计方程}
+
+对似然函数求导，令导数为零，得：
+
+\begin{equation}
+    \begin{aligned}
+        \pdf{L(\beta)}{\beta}
+        &=\pdf{}{\beta}(\sum_{i=1}^n(-e^{\beta_0+\beta_1x_i}+y_i(\beta_0+\beta_1x_i)-\log(y_i!)))\\
+        &=\sum_{i=1}^n\pdf{}{\beta}(-e^{\beta_0+\beta_1x_i}+y_i(\beta_0+\beta_1x_i)-\log(y_i!))\\
+        &=\sum_{i=1}^n(-e^{\beta_0+\beta_1x_i}+y_i(\beta_0+\beta_1x_i)-\log(y_i!))\\
+        &=\sum_{i=1}^n(-e^{\beta_0+\beta_1x_i}+y_ix_i)\\
+        &=0\\
+    \end{aligned}
+\end{equation}
+
+解得：
+
+$$\hat{\beta_1}=\df{\sum_{i=1}^ny_ix_i-\sum_{i=1}^ne^{\beta_0+\beta_1x_i}}{\sum_{i=1}^nx_i^2}$$
+
+$$\hat{\beta_0}=\df{\sum_{i=1}^ny_i-\hat{\beta_1}\sum_{i=1}^nx_i}{n}$$
+
+\end{document}

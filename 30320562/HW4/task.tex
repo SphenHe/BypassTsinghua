@@ -1,0 +1,621 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{amsmath}        %数学公式
+\usepackage{amssymb}
+\usepackage{cases}          %联立编号
+\usepackage{cite}           %引用
+\usepackage{abstract}       %摘要
+% \usepackage{enumitem}       %编号
+
+\usepackage{graphicx}       %插入图片
+\usepackage{float}          %设置图片浮动位置
+\usepackage{subfigure}      %插入多图时用子图显示
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{anyfontsize}    %解决一个奇怪的字体大小报错问题
+\usepackage{fancyhdr}       %页眉、页脚、页码
+\usepackage[a4paper, margin=1in]{geometry}    %纸张大小
+\usepackage{longtable}
+
+\newcommand\f[2]{\frac{#1}{#2}}
+\newcommand\pf[2]{\frac{\partial#1}{\partial#2}}
+\newcommand\df[2]{\dfrac{#1}{#2}}
+\newcommand\pdf[2]{\dfrac{\partial#1}{\partial#2}}
+\newcommand\zsin[1]{\frac{e^{i#1}-e^{-i#1}}{2i}}
+\newcommand\zdsin[1]{\dfrac{e^{i#1}-e^{-i#1}}{2i}}
+\newcommand\zcos[1]{\frac{e^{i#1}+e^{-i#1}}{2i}}
+\newcommand\zdcos[1]{\dfrac{e^{i#1}+e^{-i#1}}{2i}}
+\newcommand\zline[1]{#1-\overline{#1}}
+
+\newcommand\dg[2]{#1^{\circ}#2'}
+
+\setlength{\headheight}{16pt}
+\pagestyle{fancy}
+\fancyhf{}
+
+\title{基于马尔可夫决策过程的快递配送问题探讨}
+\author{\LaTeX\ by\ Jerry\ }
+\date{\today}
+\pagenumbering{arabic}
+
+\lstset{
+    basicstyle          =   \sffamily,          % 基本代码风格
+    keywordstyle        =   \bfseries,          % 关键字风格
+    commentstyle        =   \rmfamily\itshape,  % 注释的风格，斜体
+    stringstyle         =   \ttfamily,  % 字符串风格
+    flexiblecolumns,                % 别问为什么，加上这个
+    numbers             =   left,   % 行号的位置在左边
+    showspaces          =   false,  % 是否显示空格，显示了有点乱，所以不现实了
+    numberstyle         =   \zihao{-5}\ttfamily,    % 行号的样式，小五号，tt等宽字体
+    showstringspaces    =   false,
+    captionpos          =   t,      % 这段代码的名字所呈现的位置，t指的是top上面
+    frame               =   lrtb,   % 显示边框
+}
+
+\lstdefinestyle{C++}{
+    language        =   C++,
+    basicstyle      =   \zihao{-5}\ttfamily,
+    numberstyle     =   \zihao{-5}\ttfamily,
+    keywordstyle    =   \color{blue},
+    keywordstyle    =   [2] \color{teal},
+    stringstyle     =   \color{magenta},
+    commentstyle    =   \color{red}\ttfamily,
+    breaklines      =   true,   % 自动换行，建议不要写太长的行
+    columns         =   fixed,  % 如果不加这一句，字间距就不固定，很丑，必须加
+    basewidth       =   0.5em,
+}
+
+
+\begin{document}
+
+\fancyhead[L]{Jerry}
+\fancyhead[C]{决策方法论期末大作业——基于马尔可夫决策过程的快递配送问题}
+\fancyfoot[C]{\thepage}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{研究背景}
+
+在全球化经济和电子商务迅猛发展的今天，快递物流行业呈现出前所未有的增长动力。
+随着在线购物的普遍化，消费者对于快递服务的效率和质量要求日益提高，这对快递
+物流企业的运营效率和服务品质提出了更高的要求。尤其是在“最后一公里”的配送环节，
+如何高效、低成本地完成货物的快速投递成为了业内关注的焦点。
+
+快递物流系统包含众多环节，其中货物输运、和快递投送是整个物流链中最为
+关键的步骤。前者涉及到货物从发货点到达分拣中心，再到达目的地快递点的过程；
+后者则是指货物从最终快递点到达消费者手中的配送过程。这两个过程的效率直接影响到
+整体物流时效和成本，进而作用于客户满意度和企业竞争力。
+
+由于涉及的变量众多，比如快递运输车辆的故障率、运输路线的选择、配送方式的多样性以及
+各种不确定因素（如交通状况、天气变化等），因而如何优化这些过程，提高物流效率，
+成为了一个复杂且富有挑战性的问题。而建立一个科学的数学模型，能够帮助物流企业在
+资源配置、路径规划等方面做出更为合理的决策，这对于提升物流服务水平、降低运营
+成本具有重要的现实意义。因此，探究和发展快递点之间货物输运和快递投送的数学模型，
+已经成为了学术界和工业界共同研究的热点问题。
+
+本文旨在对货物输运和快递投送两个过程建立数学模型，
+以期对快递配送的问题进行深入研究，优化配送效率。\cite{Sample}
+
+\section{问题设计}
+
+\subsection{研究方法}
+
+\subsubsection{马尔可夫决策过程}
+
+在数学中，马尔可夫决策过程（英语：Markov decision process，MDP）是离散时间随机
+控制过程。 它提供了一个数学框架，用于在结果部分随机且部分受决策者控制的情况下
+对决策建模。 MDP对于研究通过动态规划解决的优化问题很有用。马尔可夫决策过程是
+马尔可夫链的推广，不同之处在于添加了行动（允许选择）和奖励（给予动机）。反过来说，
+如果每个状态只存在一个操作和所有的奖励都是一样的，一个马尔可夫决策过程可以归结为
+一个马尔可夫链。\cite{WikiMDP}
+
+\subsubsection{问题分析}
+
+快递点之间的货物输运和快递投送问题可以被看作一个马尔可夫决策过程，因为这一过程涉及
+到在不确定性环境下做出一系列的决策以达到优化目标，比如最小化总运输时间、成本或者
+最大化客户满意度，且下一阶段的状态取决于当前状态和当前决策，与之前做出的决策无关。
+
+在实际应用中，快递公司可能会使用马尔可夫决策过程来制定出最佳的快递路径、车辆分配和
+货物分拣策略。例如，公司可能会设定一个目标函数，如最小化总成本或最大化准时送达率，
+然后使用强化学习或其他优化算法来找出最佳策略。
+
+马尔可夫决策过程在处理此类问题时有其优势，因为它可以在考虑未来潜在回报的同时处理
+每个决策点处的不确定性。这对于快递物流这类需要在动态和不完全可预测的环境中做出
+一系列决策的问题尤其有效。
+
+\subsection{模型建立}
+
+我们假设$S$市中有一个快递服务中心，该中心负责$S$跨市区的快递转运业务。由于网购高峰期，
+这个快递服务中心收到了大量的的快递。考虑到顾客的等待时间，需要在$k=5$天内尽可能多的运输快递。
+快递中心所拥有的车辆是有限的（$N=10$），当车辆运输$M=3$吨快递时，车辆有$\alpha=0.1$的损坏率。
+当车辆运输$N=5$顿快递时，车辆有$\beta=0.3$的损坏率。为方便计算，我们假设车辆损坏后不可修复。
+我们需要求出5天内的运量最大值。
+
+同时，我们假设在$S$市中有8个快递点，这8个快递点互相连通，并负责这个市内的快递转运业务。
+这8个快递点分别为$S_1$、$S_2$、$S_3$、$S_4$、$S_5$、$S_6$、$S_7$、$S_8$。为方便书写，
+我们记$W_{ij}=t$记为在$S_i$和$S_j$点之间运输快递，$S_i$和$S_j$点之间的运输成本为$t$元/吨。
+
+\section{模型求解}
+
+\subsection{快递配送问题}
+
+在计算中，为了方便计算，我们假设车辆个数可以为小数辆，此时我们求得的是分配车辆和平均运输成本
+的期望，当我们将这一个快递点扩展到更多的相似的快递点时，这个结果会有更具体的意义。
+即理解为这几个快递点的收益/配送车辆的平均值。
+
+\subsubsection{模型建立及解答方法}
+
+从假设中可以看出，五天内的分配策略之间是无后效性的，可以考虑用马尔科夫决策过程进行分析。
+
+设阶段 $k$ 表示天数，则 $k=1,2,3,4,5$ ；状态变量 $S_k$ 表示第 $k$ 天初所拥有的未发生故障的
+车辆数目，亦即 $k-1$ 晚上未发生故障的车辆数目；决策变量 $x_k$ 表示在第 $k$ 天运输 $N=4$ 吨
+车辆数目，同时得到 $S_k-x_k$ 为当日分配运输 $M=2$ 吨的车辆数目。
+
+可得状态转移方程为：
+
+$$S_{k+1}=\alpha x_k+\beta (S_k−x_k)=0.7x_k+0.9(S_k−x_k)=0.9S_k−0.2x_k$$
+
+允许决策的集合为：
+
+$$A_k(S_k)=\{x_k:0\leq x_k \leq S_k\}$$
+
+设一个阶段指标$g_k(S_k,x_k)$作为每天的收益，由于每天的收益是由当天的决策和状态决定的，因此：
+
+$$g_k(S_k,x_k)=5x_k+3(S_k-x_k)=3S_k+2x_k$$
+
+由于每天的决策都是相互独立的，因此可以将五天的目标函数相加，得到总的目标函数为：
+
+$$G(S,x)=\sum_{k=1}^{5}G_k(S_k,x_k)=3\sum_{k=1}^{5}S_k+2\sum_{k=1}^{5}x_k$$
+
+设有最优函数$J_k(S_k)$表示第$k$天初状态为$S_k$时的最优值，得到贝尔曼方程为
+
+$$J_k(S_k)=\max_{x_k\in A_k(S_k)}\{g_k(S_k,x_k)+J_{k+1}(S_k+1)\}$$
+
+边界条件为：$J_6(S_6)=0$
+
+\subsubsection{求解}
+
+使用MDP的逆推归纳法，从第五天开始，逐步向前推导，得到最优决策
+
+\begin{equation*}
+    \begin{aligned}
+        J_5(S_5)&=\max_{x_5\in A_5(S_5)}\{g_5(S_5,x_5)+J_6(S_6)\}\\
+                &=\max_{x_5\in A_5(S_5)}\{3S_5+2x_5\}\\
+    \end{aligned}
+\end{equation*}
+
+此时显然有$J_5(S_5)$是关于$x_5$的线性函数，因此当$S_5\geq 0$时，$J_5(S_5)$在$A_5(S_5)$上取最大值时，$x_5^*=S_5$，此时
+
+$$J_5(S_5)=5S_5=5(0.9S_4-0.2x_4)$$
+
+在$k=4$时，$J_4(S_4)$的表达式为
+
+\begin{equation*}
+    \begin{aligned}
+        J_4(S_4)&=\max_{x_4\in A_4(S_4)}\{g_4(S_4,x_4)+J_5(S_5)\}\\
+                &=\max_{x_4\in A_4(S_4)}\{3S_4+2x_4+5(0.9S_4-0.2x_4)\}\\
+                &=\max_{x_4\in A_4(S_4)}\{7.5S_4+x_4\}\\
+    \end{aligned}
+\end{equation*}
+
+此时显然有$J_4(S_4)$是关于$x_4$的线性函数，因此当$S_4\geq 0$时，$J_4(S_4)$在$A_4(S_4)$上取最大值时，$x_4^*=S_4$，此时
+
+$$J_4(S_4)=8.5S_4=8.5(0.9S_3-0.2x_3)$$
+
+在$k=3$时，$J_3(S_3)$的表达式为
+
+\begin{equation*}
+    \begin{aligned}
+        J_3(S_3)&=\max_{x_3\in A_3(S_3)}\{g_3(S_3,x_3)+J_4(S_4)\}\\
+                &=\max_{x_3\in A_3(S_3)}\{3S_3+2x_3+8.5(0.9S_3-0.2x_3)\}\\
+                &=\max_{x_3\in A_3(S_3)}\{10.65S_3+0.3x_3\}\\
+    \end{aligned}
+\end{equation*}
+
+此时显然有$J_3(S_3)$是关于$x_3$的线性函数，因此当$S_3\geq 0$时，$J_3(S_3)$在$A_3(S_3)$上取最大值时，$x_3^*=S_3$，此时
+
+$$J_3(S_3)=10.95S_3=10.95(0.9S_2-0.2x_2)$$
+
+在$k=2$时，$J_2(S_2)$的表达式为
+
+\begin{equation*}
+    \begin{aligned}
+        J_2(S_2)&=\max_{x_2\in A_2(S_2)}\{g_2(S_2,x_2)+J_3(S_3)\}\\
+                &=\max_{x_2\in A_2(S_2)}\{3S_2+2x_2+10.95(0.9S_2-0.2x_2)\}\\
+                &=\max_{x_2\in A_2(S_2)}\{12.855S_2-0.19x_2\}\\
+    \end{aligned}
+\end{equation*}
+
+此时显然有$J_2(S_2)$是关于$x_2$的线性函数，因此当$S_2\geq 0$时，$J_2(S_2)$在$A_2(S_2)$上取最大值时，$x_2^*=0$，此时
+
+$$J_2(S_2)=12.855S_2=12.855(0.9S_1-0.2x_1)$$
+
+在$k=1$时，$J_1(S_1)$的表达式为
+
+\begin{equation*}
+    \begin{aligned}
+        J_1(S_1)&=\max_{x_1\in A_1(S_1)}\{g_1(S_1,x_1)+J_2(S_2)\}\\
+                &=\max_{x_1\in A_1(S_1)}\{3S_1+2x_1+12.855(0.9S_1-0.2x_1)\}\\
+                &=\max_{x_1\in A_1(S_1)}\{14.5695S_1-0.571x_1\}\\
+    \end{aligned}
+\end{equation*}
+
+此时显然有$J_1(S_1)$是关于$x_1$的线性函数，因此当$S_1\geq 0$时，$J_1(S_1)$在$A_1(S_1)$上取最大值时，$x_1^*=0$，此时
+
+$$J_1(S_1)=14.5695S_1$$
+
+因此，当$S_1\geq 0$时，$J_1(S_1)$在$A_1(S_1)$上取最大值时，$x_1^*=0$，$x_2^*=0$，$x_3^*=S_3$，$x_4^*=S_4$，$x_5^*=S_5$，此时
+带入$S_1=10$，$x_1=0$, $x_2=0$, $x_3=8.1$, $x_4=5.67$, $x_5=3.969$，
+得到$J_1(10)=145.695$，$J_2(9)=115.695$，$J_3(8.1)=88.695$，$J_4(5.67)=48.195$，$J_5(3.969)=19.845$，$J_6=0$
+
+此时，可以得到最优解为：
+
+$$G(S,x)=3\sum_{k=1}^{5}S_k+2\sum_{k=1}^{5}x_k=1289.313\text{吨}$$
+
+此即题目条件下的最优解。\cite{食用马尔可夫}
+
+\subsection{快递点之间转运的路径选择问题}
+
+在运输过程中，快递点之间的路径选择是一个重要的问题。在这一问题中，我们将各种因素简化为在快递点之间
+运输快递的成本。我们假设在$S$市中有6个快递点，这6个快递点互相连通，并负责这个市内的快递转运业务。
+这8个快递点分别为$S_1$、$S_2$、$S_3$、$S_4$、$S_5$、$S_6$。为方便书写，我们记
+$W_{ij}=t$记为在$S_i$和$S_j$点之间运输快递，$S_i$和$S_j$点之间的运输成本为$t$元/吨。
+
+快递点之间的运输成本如表\ref{tab:costs}所示。%当需要通过快递点中转的时候，我们假设每个中转的成本为$1$。
+
+\begin{table}[ht]
+    \centering
+    \caption{快递点之间的成本}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+        & $S_1$ & $S_2$ & $S_3$ & $S_4$ & $S_5$ & $S_6$ \\ \hline
+        $S_1$ & 0 & 2 & 1 & 7 & 4 & 5 \\ \hline
+        $S_2$ & 2 & 0 & 3 & 4 & 2 & 9 \\ \hline
+        $S_3$ & 1 & 3 & 0 & 3 & 8 & 3 \\ \hline
+        $S_4$ & 7 & 4 & 3 & 0 & 2 & 1 \\ \hline
+        $S_5$ & 4 & 2 & 8 & 2 & 0 & 1 \\ \hline
+        $S_6$ & 5 & 9 & 3 & 1 & 1 & 0 \\ \hline
+    \end{tabular}
+    \label{tab:costs}
+\end{table}
+
+\subsubsection{算法描述}
+
+我们使用逆推归纳法来解决这一问题
+
+有限阶段内成本最小的策略,就是求解如下最优化问题：
+
+$$\min_{u(\cdot, \cdot )}E[\sum_{t=0}^{T-1}g_{u(x_t,t)}(x_t)|x_0=x]$$
+
+在这一过程中，随着状态和阶段的增加，策略的数量呈指数增长，故采用动态规划算法：
+
+$$\min_{a\in A_x}{g_a(x)+\sum_{y\in S}^{}P_a(x,y)},\min_{u(\cdot, \cdot )}E[\sum_{t=0}^{T-1}g_{u(x_t,t)}(x_t)|x_1=y]$$
+
+我们将$J^*(x,t_0)$定义为$$J^*(x,t_0)=\min_{a\in (\cdot, \cdot )} E[\sum_{t=t_0}^{T-1}g_{u(x_t,t)}(x_t)|x_{t_0}=y]$$
+
+显然，如果已知$J^*(\cdot,t_0+1)$，则很容易求解动态规划的方程，得到$J^*(x,t_0)$：
+
+$$J^*(x,t_0)=\min_{a\in A_x}{g_a(x)+\sum_{y\in S}^{}P_a(x,y)J^*(y,t_0+1)}$$
+
+动态规划的方程也表明：$x$状态和$t_0$时刻的最优行为可简单归结为使$J^*(x,t_0)$最小化，采用反演方法很容易证明
+
+我们把$J^*(x,t)$称为代价函数，通过$$J^*(x,T-1)=\min_a g_a(x)$$我们发现这是一个递归的过程，我们可以通过递归的方式求解$J^*(x,t)$。
+
+\subsubsection{算法实现}
+
+我们以$S_1$为例，计算其他快递点到$S_1$最低成本，其余快递点的计算方法类似。
+
+在$1$步内直接送达的成本最小的策略为：
+
+\begin{equation*}
+    \left\{
+    \begin{aligned}
+        &J_1(2)=W_{12}=2 \\
+        &J_1(3)=W_{13}=1 \\
+        &J_1(4)=W_{14}=7 \\
+        &J_1(5)=W_{15}=4 \\
+        &J_1(6)=W_{16}=5 \\
+    \end{aligned}
+    \right.
+\end{equation*}
+
+此时，已知的成本最小的策略为：
+
+\begin{equation*}
+    \left\{
+    \begin{aligned}
+        &J(2)=J_1(2)=2 \\
+        &J(3)=J_1(3)=1 \\
+        &J(4)=J_1(4)=7 \\
+        &J(5)=J_1(5)=4 \\
+        &J(6)=J_1(6)=5 \\
+    \end{aligned}
+    \right.
+\end{equation*}
+
+从$S_i$点走两步到达$S_1$点的最小成本为：
+
+\begin{equation*}
+    i=2:
+    J_2(2)=\min_{2\leq j\leq6}[W_{2j}+J_1(j)]=\min
+    \left[
+    \begin{aligned}
+        &W_{22}+J_1(2) \\
+        &W_{23}+J_1(3) \\
+        &W_{24}+J_1(4) \\
+        &W_{25}+J_1(5) \\
+        &W_{26}+J_1(6) \\
+    \end{aligned}
+    \right]
+    =\min
+    \left[
+    \begin{aligned}
+        &0+2 \\
+        &3+1 \\
+        &4+7 \\
+        &2+4 \\
+        &9+5 \\
+    \end{aligned}
+    \right]
+    =\min
+    \left[
+    \begin{aligned}
+        &2 \\
+        &4 \\
+        &11 \\
+        &6 \\
+        &14 \\
+    \end{aligned}
+    \right]
+    =2
+\end{equation*}
+
+\begin{equation*}
+    i=3:
+    J_2(3)=\min_{2\leq j\leq6}[W_{3j}+J_1(j)]=\min
+    \left[
+    \begin{aligned}
+        &W_{32}+J_1(2) \\
+        &W_{33}+J_1(3) \\
+        &W_{34}+J_1(4) \\
+        &W_{35}+J_1(5) \\
+        &W_{36}+J_1(6) \\
+    \end{aligned}
+    \right]
+    =\min
+    \left[
+    \begin{aligned}
+        &3+2 \\
+        &0+1 \\
+        &3+7 \\
+        &8+4 \\
+        &3+5 \\
+    \end{aligned}
+    \right]
+    =\min
+    \left[
+    \begin{aligned}
+        &5 \\
+        &1 \\
+        &10 \\
+        &12 \\
+        &8 \\
+    \end{aligned}
+    \right]
+    =1
+\end{equation*}
+
+\begin{equation*}
+    i=4:
+    J_2(4)=\min_{2\leq j\leq6}[W_{4j}+J_1(j)]=\min
+    \left[
+    \begin{aligned}
+        &W_{42}+J_1(2) \\
+        &W_{43}+J_1(3) \\
+        &W_{44}+J_1(4) \\
+        &W_{45}+J_1(5) \\
+        &W_{46}+J_1(6) \\
+    \end{aligned}
+    \right]
+    =\min
+    \left[
+    \begin{aligned}
+        &4+2 \\
+        &3+1 \\
+        &0+7 \\
+        &2+4 \\
+        &1+5 \\
+    \end{aligned}
+    \right]
+    =\min
+    \left[
+    \begin{aligned}
+        &6 \\
+        &4 \\
+        &7 \\
+        &6 \\
+        &6 \\
+    \end{aligned}
+    \right]
+    =4
+\end{equation*}
+
+\begin{equation*}
+    i=5:
+    J_2(5)=\min_{2\leq j\leq6}[W_{5j}+J_1(j)]=\min
+    \left[
+    \begin{aligned}
+        &W_{52}+J_1(2) \\
+        &W_{53}+J_1(3) \\
+        &W_{54}+J_1(4) \\
+        &W_{55}+J_1(5) \\
+        &W_{56}+J_1(6) \\
+    \end{aligned}
+    \right]
+    =\min
+    \left[
+    \begin{aligned}
+        &2+2 \\
+        &8+1 \\
+        &2+7 \\
+        &0+4 \\
+        &1+5 \\
+    \end{aligned}
+    \right]
+    =\min
+    \left[
+    \begin{aligned}
+        &4 \\
+        &9 \\
+        &9 \\
+        &4 \\
+        &6 \\
+    \end{aligned}
+    \right]
+    =4
+\end{equation*}
+
+\begin{equation*}
+    i=6:
+    J_2(6)=\min_{2\leq j\leq6}[W_{6j}+J_1(j)]=\min
+    \left[
+    \begin{aligned}
+        &W_{62}+J_1(2) \\
+        &W_{63}+J_1(3) \\
+        &W_{64}+J_1(4) \\
+        &W_{65}+J_1(5) \\
+        &W_{66}+J_1(6) \\
+    \end{aligned}
+    \right]
+    =\min
+    \left[
+    \begin{aligned}
+        &9+2 \\
+        &3+1 \\
+        &1+7 \\
+        &1+4 \\
+        &0+5 \\
+    \end{aligned}
+    \right]
+    =\min
+    \left[
+    \begin{aligned}
+        &11 \\
+        &4 \\
+        &8 \\
+        &5 \\
+        &5 \\
+    \end{aligned}
+    \right]
+    =4
+\end{equation*}
+
+此时，已知的成本最小的策略为：
+
+\begin{equation*}
+    \left\{
+    \begin{aligned}
+        &J(2)=\min\{J(2),J_2(2)\}=2 \\
+        &J(3)=\min\{J(3),J_2(3)\}=1 \\
+        &J(4)=\min\{J(4),J_2(4)\}=4 \\
+        &J(5)=\min\{J(5),J_2(5)\}=4 \\
+        &J(6)=\min\{J(6),J_2(6)\}=4 \\
+    \end{aligned}
+    \right.
+\end{equation*}
+
+我们继续迭代，计算从$S_i$点走$k$步到达$S_1$点的最小成本，从而对得到成本最小的策略为：
+
+\begin{equation*}
+    \left\{
+    \begin{aligned}
+        &J(2)=\min\{J(2),\min_{2\leq j\leq6}[W_{2j}+J_{k-1}(j)]\} \\
+        &J(3)=\min\{J(3),\min_{2\leq j\leq6}[W_{3j}+J_{k-1}(j)]\} \\
+        &J(4)=\min\{J(4),\min_{2\leq j\leq6}[W_{4j}+J_{k-1}(j)]\} \\
+        &J(5)=\min\{J(5),\min_{2\leq j\leq6}[W_{5j}+J_{k-1}(j)]\} \\
+        &J(6)=\min\{J(6),\min_{2\leq j\leq6}[W_{6j}+J_{k-1}(j)]\} \\
+    \end{aligned}
+    \right.
+\end{equation*}
+
+按照这个方式，多次迭代计算直到$k=6$。我们使用程序模拟这一迭代过程。程序框架的伪代码如下，具体的代码见文末。
+
+\lstinputlisting[
+    style       =   C++,
+    caption     =   {\bf FakeCode},
+    label       =   {FakeCode}
+]{code/FakeCode}
+
+同时，计算其他快递点到$S_i$的最小成本，最终得到表\ref{tab:mincosts}：
+
+\begin{table}[ht]
+    \centering
+    \caption{快递点之间的最低运输成本}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+        & $S_1$ & $S_2$ & $S_3$ & $S_4$ & $S_5$ & $S_6$ \\ \hline
+        $S_1$ & 0 & 2 & 1 & 4 & 4 & 4 \\ \hline
+        $S_2$ & 2 & 0 & 3 & 4 & 2 & 3 \\ \hline
+        $S_3$ & 1 & 3 & 0 & 3 & 4 & 3 \\ \hline
+        $S_4$ & 4 & 4 & 3 & 0 & 2 & 1 \\ \hline
+        $S_5$ & 4 & 2 & 4 & 2 & 0 & 1 \\ \hline
+        $S_6$ & 4 & 3 & 3 & 1 & 1 & 0 \\ \hline
+    \end{tabular}
+    \label{tab:mincosts}
+\end{table}
+
+此时，我们可以得到快递点之间的最低运输成本。\cite{应用随机过程}
+
+\section{反思与深化}
+
+\subsection{故障率计算}
+
+在成本计算中，我们假设每辆车运输时的故障率是定值，且与运输的距离无关。但实际情况中，这一假设是不合理的。
+同时，故障率也应与车辆运输的时间有关，而这不一定符合马尔可夫过程的假设。为了解决这一问题，我们可以将故障率
+与运输的距离和时间联系起来，重新建立相应的数学模型。这个需要进行进一步的研究。
+
+\subsection{快递点之间的运输成本}
+
+在成本计算中，我们假设每条路线的运输成本是一致的。但是在实际情况中，运输成本并不是一个固定值。
+但是，在后续的研究中。我们可以通过对过去的数据进行分析，采用广义线性回归分析的方法，得到一个
+近似的结果，再利用得到的近似值，进行计算。也可以在路径的成本变更后，通过计算机进行快速迭代，得到最佳的运输策略。
+
+
+\subsection{快递中心运输能力不足}
+
+在实际情况中，快递中心的运输能力可能不足，导致无法在当天将所有的快递运输到快递点。这时，
+我们可以将这一问题转化为一个多阶段的马尔可夫决策过程，通过动态规划的方法，得到最佳的
+运输策略。这也是本文可以进行的进一步研究的方向。
+
+\section{总结}
+
+在本次作业中，我对快递配送问题进行了深入的研究，建立了相应的数学模型，并对模型进行了求解。
+同时，我还对模型的求解方法进行了分析，并对模型的求解方法进行了改进。在模型的求解过程中，
+我使用了马尔可夫决策过程和逆推归纳法两个方法，并借助动态规划的方法，得到了最佳的策略。
+除此之外，我还使用了C++语言进行编程，利用计算机的优势，提高了计算的效率、速度和准确性。
+
+同时，我也发现了模型的不足之处，比如在成本计算中，我们假设每辆车的运输成本、故障率为固定值、
+没有考虑更多的干扰因素等，这也是这篇论文待改进的地方。
+
+\section{代码}
+
+\lstinputlisting[
+    style       =   C++,
+    caption     =   {\bf LeastDistance.cpp},
+    label       =   {LeastDistance}
+]{code/LeastDistance.cpp}
+
+
+% plain(参考文献的条目编号是按照字母的顺序)
+% unsrt(参考文献的条目编号是按照引用的顺序)
+% alpha(参考文献的条目编号是按照作者名字和出版年份的顺序)
+% abbrv(缩写格式)
+
+\bibliographystyle{unsrt}
+\bibliography{task.bib}
+
+\end{document}
