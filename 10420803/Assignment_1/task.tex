@@ -1,0 +1,226 @@
+\documentclass[utf8]{article}
+\usepackage[UTF8]{ctex}
+
+\usepackage{amsmath}        %数学公式
+\usepackage{amssymb}
+\usepackage{cases}          %联立编号
+\usepackage{cite}           %引用
+
+\usepackage{graphicx}       %插入图片
+\usepackage{float}          %设置图片浮动位置
+\usepackage{subfigure}      %插入多图时用子图显示
+
+\usepackage{anyfontsize}    %解决一个奇怪的字体大小报错问题
+\usepackage{fancyhdr}       %页眉、页脚、页码
+\usepackage[a4paper, margin=1in]{geometry}    %纸张大小
+\usepackage{longtable}
+
+\title{\bf\huge 概率论与数理统计 - 作业 1}
+\author{Jerry}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{T2. }
+
+\subsubsection*{Bertrand 悖论：在一个圆内任意选一条弦，这条弦的弦长长于这个圆的内接等边三角形的边长的概率是多少？}
+
+在Bertrand 悖论中，有三种不同的解法：
+
+a. 在直径上取点然后做垂线产生弦，此时概率为$\frac{1}{2}$
+
+b. 固定弦的一点然后在圆周上取另一点，此时概率为$\frac{1}{3}$
+
+c. 在圆内取点然后根据中点做弦，此时概率为$\frac{1}{4}$
+
+~
+
+在这三种选取方式中，由于所认为的“等可能性”不同，故样本空间不同；同时，将“随机选取”理解为在样本空间内等可能取点，从而导致了悖论的产生。可以看出选择不同的坐标会导致不同的概率分配，因此在定义概率时要事先明确指出样本空间是什么。
+
+\section*{T3. }
+
+甲应该得到150元，乙应该得到50元。
+
+甲乙两人实力相当，我们可以认为获胜的概率均为0.5。在比赛中，第一轮的结果为已知的，并不能对后续的比赛结果产生影响。在等概率的情况下考虑后续的比赛，有三种可能的结果：
+
+a. 甲胜，则比赛结束（概率为1/2）
+
+b. 乙胜，则比赛继续（概率为1/2）
+
+\ \ \ \ b.1. 甲再胜，则比赛结束（概率为1/2*1/2=1/4）
+
+\ \ \ \ b.2. 乙再胜，则比赛结束（概率为1/2*1/2=1/4）
+
+可以得到甲胜的概率为3/4，乙胜的概率为1/4，故甲得200*3/4=150元，乙得50元
+
+\section*{T4. }
+
+假设$A$赢的概率为$p$，获得的利润为$W$，
+
+有$W$的数学期望为：$W=5p-20(1-p)=25p-20\geq0$，解之得$p\geq0.8$，故甲的胜率应大于等于0.8，此人对 A 队获胜的主观概率是80\%。
+
+\section*{T5. }
+
+假设$A$、$B$赢的概率分别为$p$、$q$，获得的利润为$W$
+
+总奖池可以理解为1000元，则可以认为$A$、$B$、$C$的赔率分别为2、10/3、5。
+
+假设有三个投资者分别投资$A$、$B$、$C$，投资的资金为$X$
+
+对$A$有：\[W_A=2pX+0(1-p)(1-X)-X=2pX-X\geq0\Rightarrow p\geq0.5\]
+
+对$B$有：\[W_B=10/3*qX+0(1-q)(1-X)-X=10/3*qX-X\geq0\Rightarrow q\geq0.3\]
+
+对$C$有：\[W_C=5(1-p-q)X+0(p+q)(1-X)-X=5(1-p-q)X-X\geq0\Rightarrow 1-p-q\geq0.2\]
+
+三名投资者均不希望亏损，则当且仅当$p=0.5,q=0.3$时，三个不等式同时成立
+
+故$A$、$B$、$C$赢的概率分别为50\%，30\%，20\%
+
+\section*{T6. }
+
+预测结果：
+
+HTHTTHHTTHHTHTHTTHHHTTTHTHHHTTHHTTTTHHTTHHTTHHTHTH
+
+实际结果：
+
+\begin{longtable}{|l|l|l|l|}
+    %\centering
+    \caption[]{实际结果统计表格} \\
+
+    % 下面是表头
+    \hline 次数(n) & H或T & 频数 n(H) & 相对频数(n(H)/n) \\ \hline
+    \endfirsthead
+
+    % 下面数字4的意思是表格的列数
+    \multicolumn{4}{l}{{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\
+    \hline 次数(n) & H或T & 频数 n(H) & 相对频数(n(H)/n) \\ \hline
+    % 注意这里把表头复制了一遍，因为在新的页面也会展示一下表头，不然表格不方便阅读
+    \endhead
+
+    \hline \multicolumn{4}{l}{{Continued on next page}} \\ \hline
+    \endfoot
+
+    \hline
+    \endlastfoot
+
+    % 下面就是真正的表格数据了，注意不用再写表头了
+        1 & H & 1 & 1.000000 \\
+        2 & H & 2 & 1.000000 \\
+        3 & T & 2 & 0.666667 \\
+        4 & T & 2 & 0.500000 \\
+        5 & T & 2 & 0.400000 \\
+        6 & T & 2 & 0.333333 \\
+        7 & T & 2 & 0.285714 \\
+        8 & T & 2 & 0.250000 \\
+        9 & H & 3 & 0.333333 \\
+        10 & H & 4 & 0.400000 \\
+        11 & H & 5 & 0.454545 \\
+        12 & H & 6 & 0.500000 \\
+        13 & H & 7 & 0.538462 \\
+        14 & H & 8 & 0.571429 \\
+        15 & T & 8 & 0.533333 \\
+        16 & H & 9 & 0.562500 \\
+        17 & T & 9 & 0.529412 \\
+        18 & H & 10 & 0.555556 \\
+        19 & T & 10 & 0.526316 \\
+        20 & T & 10 & 0.500000 \\
+        21 & T & 10 & 0.476190 \\
+        22 & T & 10 & 0.454545 \\
+        23 & H & 11 & 0.478261 \\
+        24 & T & 11 & 0.458333 \\
+        25 & H & 12 & 0.480000 \\
+        26 & H & 13 & 0.500000 \\
+        27 & H & 14 & 0.518519 \\
+        28 & T & 14 & 0.500000 \\
+        29 & T & 14 & 0.482759 \\
+        30 & H & 15 & 0.500000 \\
+        31 & H & 16 & 0.516129 \\
+        32 & H & 17 & 0.531250 \\
+        33 & T & 17 & 0.515152 \\
+        34 & H & 18 & 0.529412 \\
+        35 & T & 18 & 0.514286 \\
+        36 & T & 18 & 0.500000 \\
+        37 & H & 19 & 0.513514 \\
+        38 & T & 19 & 0.500000 \\
+        39 & H & 20 & 0.512821 \\
+        40 & H & 21 & 0.525000 \\
+        41 & H & 22 & 0.536585 \\
+        42 & T & 22 & 0.523810 \\
+        43 & T & 22 & 0.511628 \\
+        44 & T & 22 & 0.500000 \\
+        45 & H & 23 & 0.511111 \\
+        46 & T & 23 & 0.500000 \\
+        47 & H & 24 & 0.510638 \\
+        48 & H & 25 & 0.520833 \\
+        49 & T & 25 & 0.510204 \\
+        50 & T & 25 & 0.500000 \\
+\end{longtable}
+
+可以看出相对频数呈现相对稳定的趋势。
+
+对预测的数据做相同的处理，可以发现预测的数据的相对频数在n>10后，始终在0.45与0.55之间波动，且相对频数随着n的增加逐渐趋于0.5，故预测结果与实际结果不存在实质性差异。
+
+\section*{T7. }
+
+我们将病人情况记为(是否投保,身体状况)
+
+(a). A包含以下2种情况：(1,f),(0,f)
+
+(b). B包含以下3种情况：(0,g),(0,f),(0,s)
+
+(c). $B^C+A$包含以下4种情况：(1,g),(1,f),(1,s),(0,f)
+
+\section*{T8. }
+
+$A\cap B+A\cap B^C=A\cap (B+B^C)=A\cap C=A$
+
+\section*{T9. }
+
+(a.1). 证明相等：
+
+$A+B=A\cup B=A\cup ((B-A)+A)=A\cup (B-A)+A\cup =A\cup (B-A)+A$
+
+$\because A\subseteq A\cup (B-A)$
+
+$\therefore A+B=A\cup (B-A)+A=A\cup (B-A)=A+(B-A)$
+
+(a.2). 证明互斥：
+
+$A\cap (B-A)=A\cap (B\cap A^C)=B\cap A\cap A^C=B\cap (A\cap A^C)=B\cap \varnothing=\varnothing$
+
+(b.1). 证明相等：
+
+$A+B=A+(B-A)=AB+AB^C+(B-A)=A\cap B+(B-A)+AB=(A-B)+(B-A)+AB$
+
+(b.2). 证明互斥：
+
+$(A-B)\cap AB=AB^C\cap AB=A\cap (B^C\cap B)=A\cap \varnothing=\varnothing$
+
+$(A-B)\cap (B-A)\subseteq A\cap (B-A)=\varnothing$
+
+$AB\cap (B-A)\subseteq A\cap (B-A)=\varnothing$
+
+\section*{T10. }
+
+%$(A+B)-(A-B)=(A\cup B)\cap (A\cap B^C)^C$
+
+$(A+B)-(A-B)=((A-B)+(B-A)+AB)-(A-B)=((A-B)\cap (A-B))\cup ((B-A)\cap (A-B))\cup (AB\cap (A-B))=\varnothing \cup \varnothing \cup \varnothing= \varnothing$
+
+\section*{T11. }
+
+记$A_1+A_2+A_3+...+A_n=A$
+
+首先将$A_1$分离出，即$A=A_1+A$\textbackslash$A_1=A_1+(A_2+A_3+...+A_n)$\textbackslash$A_1=A_1+A_2$\textbackslash$A_1+A_3$\textbackslash$A_1+...+A_n$\textbackslash$A_1$
+
+同理，再将$A_2$分离出，即$A$\textbackslash$A_1$=$A_2$\textbackslash$A_1+(A$\textbackslash$A_1)$\textbackslash$A_2=A_2$\textbackslash$A_1+(A_3+...+A_n)$\textbackslash$A_2=A_2$\textbackslash$A_1+(A_3$\textbackslash$A_2)$\textbackslash$A_1+...+(A_n$\textbackslash$A_2)$\textbackslash$A_1$
+
+同理，再将$A_3$分离出，……
+
+以此重复下去，则可$A$拆为多个互斥事件的和：
+
+$A=A_1+A_2$\textbackslash$A_1+(A_3$\textbackslash$A_2)$\textbackslash$A_1+((A_4$\textbackslash$A_3)$\textbackslash$A_2)$\textbackslash$A_1+...+(...(A_n$\textbackslash$A_{n-1})$\textbackslash$A_{n-2}...)$\textbackslash$A_1$
+
+\end{document}
