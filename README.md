@@ -23,11 +23,11 @@
 
 Issue、Pull request、纠错、作业答案等，完全欢迎！
 
-在贡献时，请不要上传自己的个人信息，也不要上传ddl尚未到期的作业，以免引起不必要的麻烦。
+在贡献时，请不要上传自己的个人信息，也不要上传 ddl 尚未到期的作业，以免引起不必要的麻烦。
 
 ### 如果不希望下载完整的仓库：
 
-1. Fork本项目，点击右上角的 `Fork` 按键，按照提示操作即可。
+1. Fork 本项目，点击右上角的 `Fork` 按键，按照提示操作即可。
 
 2. Clone 这个仓库，这一步完成后，本地会得到一个没有下载任何仓库内文件的对应文件夹。
 
@@ -51,7 +51,7 @@ Issue、Pull request、纠错、作业答案等，完全欢迎！
 除非另有说明，本仓库的内容采用以下许可：
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license](https://creativecommons.org/licenses/by-nc-sa/4.0/)。
 
-如果有不适用的情况或者侵权，请提交issue或联系我，我会尽快修复或删除。
+如果有不适用的情况或者侵权，请提交 issue 或联系我，我会尽快修复或删除。
 
 ## 附录
 
