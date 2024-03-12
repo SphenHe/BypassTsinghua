@@ -4,6 +4,8 @@
 
 本仓库用于发布 *SphenHe* 的作业，以及一些课程资料，以期帮助同学们更好地学习。如果觉得这个仓库对你有帮助，欢迎点个 `star`。
 
+为了方便校内同学访问，本仓库在推送到 [GitHub](https://github.com/SphenHe/BypassTsinghua) 仓库的同时，也会向清华的 [GitLab](https://git.tsinghua.edu.cn/he-yf22/BypassTsinghua) 仓库推送一份镜像。但是所有的 issue 和 pull request 都只会在 GitHub 上处理。
+
 为了避免混淆，本仓库均采用课程号作为文件夹名。也可以通过README中的目录快速定位到对应课程。
 
 在每个课程的文件夹中，会有一个 `README.md` 文件，用于说明该课程的一些信息，一般包含 `文件目录` 和 `作业得分` 。其余文件为课程的资料（如作业等）。
@@ -51,7 +53,7 @@ Issue、Pull request、纠错、作业答案等，完全欢迎！
 除非另有说明，本仓库的内容采用以下许可：
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license](https://creativecommons.org/licenses/by-nc-sa/4.0/)。
 
-如果有不适用的情况或者侵权，请提交 issue 或联系我，我会尽快修复或删除。
+如果有不适用的情况或者侵权，请提交 [issue](https://github.com/SphenHe/BypassTsinghua/issues) 或通过[邮件](mailto:a167294381b@163.com)联系我，我会尽快修复或删除。
 
 ## 附录
 
