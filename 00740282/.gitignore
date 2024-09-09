@@ -1,0 +1,10 @@
+# Remove temp/cache folder/files
+__pycache__
+*/__pycache__
+
+# Remove virtualenv folder
+venv/
+
+# Remove generated files
+chapter4/floats_dump_file.dat
+chapter5/weather_info.txt
