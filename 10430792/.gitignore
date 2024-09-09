@@ -1,0 +1,10 @@
+*/*.aux
+*/*.log
+*/*.synctex.gz
+*/*.toc
+*/img/OriginalData.jpg
+*/img/OriginalData*.jpg
+*/img/OriginalData.png
+*/img/OriginalData*.png
+*/textbook/*
+*/*.pdf
