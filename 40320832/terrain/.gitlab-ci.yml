@@ -1,0 +1,16 @@
+grade:
+  image: python:3.10-bullseye
+  cache:
+    paths:
+      - data/weather/*
+  before_script:
+    - python3 -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+    - python3 -m pip install --no-cache-dir numpy scipy matplotlib Pillow
+    - ./data/fetch.sh
+  script:
+    - python3 terrain.py
+    - test -f terrain.pdf
+  artifacts:
+    paths:
+      - terrain.pdf
+    expire_in: never

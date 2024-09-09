@@ -1,0 +1,10 @@
+要素ID                        要素中文含义                  要素单位                      要素类型                      要素值范围                    特征值                        特征值说明                    
+Station_Id_C                  区站号/观测平台标识 (字符)    字符                          Decimal                                                                                   
+Year                          年                            年                            Decimal                                                                                   
+Mon                           月                            月                            Decimal                                                                                   
+Day                           日                            日                            Decimal                                                                                   
+Hour                          时次                          时                            Decimal                                                                                   
+PRS                           气压                          百帕                          Decimal                                                                                   
+WIN_D_Avg_2mi                 2分钟平均风向(角度)           度                            Decimal                                                                                   
+WIN_S_Avg_2mi                 2分钟平均风速                 米/秒                         Decimal                                                                                   
+TEM                           温度/气温                     摄氏度(℃)                    Decimal                                                                                   

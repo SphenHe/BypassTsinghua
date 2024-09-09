@@ -1,0 +1,11 @@
+grade:
+  image: python:3.10-bullseye
+  script:
+    - python3 -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+    - python3 -m pip install --no-cache-dir numpy h5py Pillow scipy
+    - test -f ./fluid.py
+    - ./scripts/grade.sh
+  artifacts:
+    paths:
+      - ./verdicts
+  

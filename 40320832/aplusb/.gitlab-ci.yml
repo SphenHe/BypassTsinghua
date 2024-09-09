@@ -1,0 +1,4 @@
+grade:
+  image: python:3.10-bullseye
+  script:
+    - python3 grade.py

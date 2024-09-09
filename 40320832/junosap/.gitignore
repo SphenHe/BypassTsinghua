@@ -1,0 +1,9 @@
+.vscode/
+__pycache__/
+
+test.py
+data.h5
+figures.pdf
+test.pdf
+vertex_density.pdf
+simulate_test.py

@@ -1,0 +1,19 @@
+name: Automated judger
+on: [push]
+
+jobs:
+  execute:
+    runs-on: [self-hosted]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Check file existence
+        run: test -f ./fluid.py
+      - name: Run judger + grader
+        run: ./scripts/grade.sh
+      - name: Upload verdict
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: verdicts
+          path: ./verdicts

@@ -1,0 +1,5 @@
+.*.sw[a-p]
+__pycache__
+std.py
+*.pdf
+debug*

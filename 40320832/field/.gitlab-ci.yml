@@ -1,0 +1,7 @@
+grade:
+  image: python:3.10-bullseye
+  script:
+    - python3 -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+    - python3 -m pip install --no-cache-dir numpy
+    - python3 grade.py
+  

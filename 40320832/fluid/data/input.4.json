@@ -1,0 +1,26 @@
+{
+  "width": 100,
+  "height": 100,
+  "time": 200,
+
+  "viscosity": 10,
+
+  "splats": [
+    {
+      "time_from": 0,
+      "time_to": 50,
+      "center": [25, 25],
+      "radius": 10,
+      "accel": [0, 5],
+      "dyes": [1, 0, 0]
+    },
+    {
+      "time_from": 0,
+      "time_to": 40,
+      "center": [75, 25],
+      "radius": 10,
+      "accel": [-3, 3],
+      "dyes": [0, 1, 1]
+    }
+  ]
+}
