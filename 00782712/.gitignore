@@ -1,0 +1,9 @@
+*/*.aux
+*/*.bbl
+*/*.blg
+*/*.log
+*/*.out
+*/*.pdf
+*/*.synctex.gz
+*/*.toc
+._wordcount_selection.tex
