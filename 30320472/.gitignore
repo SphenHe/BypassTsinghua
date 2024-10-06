@@ -1,0 +1,14 @@
+*/*.aux
+*/*.bbl
+*/*.blg
+*/*.log
+*/*.synctex.gz
+*/*.toc
+*/*.out
+*/._wordcount_selection.tex
+*/img/OriginalData.jpg
+*/img/OriginalData*.jpg
+*/img/OriginalData.png
+*/img/OriginalData*.png
+*/textbook/*
+*/*.pdf

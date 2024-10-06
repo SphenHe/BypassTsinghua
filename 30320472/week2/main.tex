@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage[UTF8]{ctex}  % 使用中文支持包
+\usepackage[a4paper, margin=1in]{geometry}  % 设置纸张大小和边距
+\usepackage{anyfontsize}  % 解决字体大小报错问题
+\usepackage{fancyhdr}  % 设置页眉、页脚、页码
+\usepackage{longtable}  % 支持长表格
+
+\usepackage{amsmath}  % 数学公式支持
+\usepackage{cases}  % 支持联立编号
+\usepackage{cite}  % 引用支持
+
+\usepackage{graphicx}  % 插入图片支持
+\usepackage{float}  % 设置图片浮动位置
+\usepackage{subfigure}  % 插入多图时用子图显示
+
+\usepackage{listings}  % 代码块支持
+\usepackage{xcolor}  % 设置代码块颜色
+
+\usepackage[hyphens]{url}  % 支持链接换行
+\usepackage{hyperref}  % 超链接支持
+\usepackage{lastpage}  % 添加lastpage包
+
+\usepackage{gbt7714}  %国标参考文献
+
+\hypersetup{
+    hidelinks,
+    colorlinks=true,
+    allcolors=black,
+    pdfstartview=Fit,
+    breaklinks=true
+}
+
+\title{聚变能源概论-第二讲作业}
+\author{\LaTeX\ by\ 何宇峰\ }
+\date{\today}
+\pagenumbering{arabic}
+
+\begin{document}
+\pagestyle{fancy}
+
+\fancyhead[L]{何宇峰}
+\fancyhead[C]{聚变能源概论-第二讲作业}
+\fancyhead[R]{\today}
+\fancyfoot[C]{Page \thepage/\pageref{LastPage}}
+
+\section*{第二讲作业}
+
+\subsection*{1. 假设可以利用 p-11B 反应制造氢弹, 请计算: }
+
+$$ p + ^{11}\text{B} \rightarrow 3 ^{4}\text{He} + 8.664 \text{MeV}$$
+
+\subsubsection*{a. 一个 1 千吨 TNT 当量的氢弹中发生了多少次聚变反应? }
+
+一千吨的 TNT 当量的能量为 $4.184 \times {10}^{12} \text{J}$\cite{TNT-equivalent}，转换为 MeV 单位为 $2.615 \times {10}^{25} \text{MeV}$
+
+所以氢弹中发生的聚变反应次数为 $$\frac{2.615 \times {10}^{25}}{8.664} = 3.018 \times {10}^{24} \text{次}$$
+
+\subsubsection*{b. 反应燃料的质量需要多少? }
+
+发生反应的燃料的数量为 $$\frac{3.018 \times {10}^{24}}{6.022 \times {10}^{23}} = 5.014 \text{mol}$$
+
+所以反应燃料的质量为 $$5.014 \times (11+1) = 60.164 \text{g}$$
+
+\subsubsection*{c. 假设爆炸中燃料只燃烧了三分之一, 炸弹的重量是燃料重量的2倍, 那么氢弹的总质量是多少? }
+
+总质量为 $$60.164 \times 3 \times 2 = 360.99 \text{g}$$
+
+\subsection*{2. 计算催化 D-D 聚变中释放能量的分配方式; 据此结果设想后续采用的能量取出方式, 并与D-T聚变进行比较. }
+
+反应中质心动量为零, 反应前后动量守恒, 则能量与质量成反比。
+
+1. 对于反应：$$D+D \rightarrow ^3He + n, Q = 3.267 MeV$$
+
+产物获得的能量：$$E(^{3}\text{He}) = \frac{m_n}{m_{^{3}\text{He}}+m_{n}} \times Q = 0.817 \text{MeV}, E(n) = \frac{m_{^{3}\text{He}}}{m_{^{3}\text{He}}+m_{n}} \times Q = 2.450 \text{MeV}$$
+
+2. 对于反应：$$D+D \rightarrow T + p, Q = 4.032 MeV$$
+
+产物获得的能量：$$E(T) = \frac{m_p}{m_T+m_p} \times Q = 1.008 \text{MeV}, E(p) = \frac{m_T}{m_T+m_p} \times Q = 3.024 \text{MeV}$$
+
+3. 对于反应：$$D+^3He \rightarrow \alpha + p, Q = 18.3 MeV$$
+
+产物获得的能量：$$E(\alpha) = \frac{m_p}{m_{\alpha}+m_p} \times Q = 3.660 \text{MeV}, E(p) = \frac{m_{\alpha}}{m_{\alpha}+m_p} \times Q = 14.640 \text{MeV}$$
+
+4. 对于反应：$$D+T \rightarrow \alpha + n, Q = 17.6 MeV$$
+
+产物获得的能量：$$E(\alpha) = \frac{m_n}{m_{\alpha}+m_n} \times Q = 3.520 \text{MeV}, E(n) = \frac{m_{\alpha}}{m_{\alpha}+m_n} \times Q = 14.080 \text{MeV}$$
+
+5. 对总反应：$$6D \rightarrow 2n + 2p + 2\alpha, Q = 43.2 MeV$$
+
+计算可得：其中中子携带的总能量为：16.53MeV, 占总放出的能量的38.2\%,其余带电粒子携带的总能量占总放出的能量的61.8\%。带电粒子的能量可以使用磁流体发电机等方式转化为电能。
+
+6. 对于单纯的DT反应，带电粒子仅携带20\%的反应能，想要利用中子的能量只有将中子动能慢化转化成热能，但是发电机热电转换效率偏低，一般不超过40\%。
+
+\subsection*{3. 在 D-He3 聚变中, D-D 次级反应会导致2.45MeV中子的产生, 这时可以通过改变燃料比影响产物中中子的份额. 试计算D和He3浓度比分别为1:1, 1:2, 1:3 时中子携带能量占反应释放总能量的份额. }
+
+查询教材附录图A.1，可以发现 D-He3 聚变反应在约 100 keV 时最合适。取 $T = 100 \text{keV}$ 时的数据进行计算。查表A.3得到：D-He3 反应的截面为 $\langle \sigma v\rangle_{D-He3@T} = 1.728 \times {10}^{-22} \text{m}^3/\text{s}$, D-D 反应的截面为 $\langle \sigma v\rangle_{D-D@T} = 5.030 \times {10}^{-23} \text{m}^3/\text{s}$。
+
+在上一题中已经计算出反应产物携带的能量比例。我们忽略与聚变的次级产物的反应，且假设D-D聚变的两种分支截面大致相等。我们直接考虑 He3 与 D 的浓度比为 $\lambda$，则：D-He3 与 D-D 反应的总截面比为 $$\frac{\lambda \cdot \langle \sigma v\rangle_{D-He3@T}}{\langle \sigma v\rangle_{D-D@T}} = 3.435\lambda$$
+
+中子携带能量占反应释放总能量的份额为：$$\frac{E_n}{E_\text{all}} = \frac{2.450 \times 0.5}{(3.267+4.032) \times 0.5 + 18.3 \times 3.435\lambda} = \frac{1.225}{3.6495 + 62.8605\lambda}$$
+
+\begin{itemize}
+    \item 取 $\lambda = 1$ 时，中子携带能量占反应释放总能量的份额为：$$\frac{1.225}{3.6495 + 62.8605} = 1.842\%$$
+    \item 取 $\lambda = 2$ 时，中子携带能量占反应释放总能量的份额为：$$\frac{1.225}{3.6495 + 125.721} = 0.947\%$$
+    \item 取 $\lambda = 3$ 时，中子携带能量占反应释放总能量的份额为：$$\frac{1.225}{3.6495 + 188.5815} = 0.637\%$$
+\end{itemize}
+
+\bibliographystyle{gbt7714-numerical}
+\bibliography{cite.bib}
+
+\end{document}
