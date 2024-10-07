@@ -1,5 +1,13 @@
 */*.aux
+*/*.bbl
+*/*.blg
+*/*.fdb_latexmk
+*/*.fls
+*/*.lof
 */*.log
+*/*.lot
+*/*.nav
+*/*.snm
 */*.synctex.gz
 */*.toc
 */*.out
