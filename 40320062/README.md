@@ -4,4 +4,4 @@
 
 ### 作业目录
 
-1. [综述一种新型反应堆](HW1/main.tex)
+1. [综述一种新型反应堆](HW1/main.tex)(可以参考[JTHU-ST](https://github.com/tsinghua-TEEP/JTHU-ST)的模板，对综述进行修改，来提交最终的作业)
