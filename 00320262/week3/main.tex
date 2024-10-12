@@ -7,7 +7,6 @@
 
 \usepackage{amsmath}  % 数学公式支持
 \usepackage{cases}  % 支持联立编号
-\usepackage[sort]{natbib}  %国标参考文献 with sorting option
 
 \usepackage{graphicx}  % 插入图片支持
 \usepackage{float}  % 设置图片浮动位置
@@ -19,8 +18,8 @@
 \usepackage[hyphens]{url}  % 支持链接换行
 \usepackage{hyperref}  % 超链接支持
 \usepackage{lastpage}  % 添加lastpage包
-
-
+\usepackage{gbt7714}  %国标参考文献
+\bibliographystyle{gbt7714-numerical}
 \hypersetup{
     hidelinks,
     colorlinks=true,
@@ -78,11 +77,23 @@ $$n(E)dE \approx \frac{8\sqrt{2}\pi m^{\frac{3}{2}}\sqrt{E}}{h^3} e^{- \frac{E-E
 
 \subsection*{2. 如果对热阴极电流密度的稳定性要求优于1\%, 对其温度稳定性和功函数的变化分别有什么要求?}
 
+$$ J = AT^2 e^{-\frac{W}{kT}}$$
+
+则有
+
+$$\frac{\partial J}{\partial T} = AT e^{-\frac{W}{kT}}\left(2+\frac{W}{kT}\right) = \frac{J}{T}(2+\frac{W}{kT})$$
+
+$$\frac{\partial J}{\partial W} = -AT e^{-\frac{W}{kT}} = \frac{J}{kT}$$
+
 对热阴极电流密度的稳定性要求优于1\%, 则有:
 
-温度的稳定性应该优于 $10\%$
+温度的稳定性应该满足 $$\frac{J}{T}(2+\frac{W}{kT})<1\%$$
 
-功函数的变化应该满足: $e^{-\frac{\Delta W}{kT}}<1\%$
+故$$\left\lvert \frac{\Delta T}{T} \right\rvert <\frac{1\%}{2+\frac{W}{kT}}$$
+
+功函数的变化应该满足: $$\frac{J}{kT}<1\%$$
+
+故$$\left\lvert \frac{\Delta W}{W} \right\rvert <\frac{1\%}{\frac{W}{kT}}$$
 
 \subsection*{3. 画出100-2000摄氏度(假设不熔化)铜、银、金、钨、LaB6的热发射电流密度}
 
@@ -94,7 +105,7 @@ $$J = A T^2 e^{-\frac{W}{kT}}$$
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{img/J-T.pdf}
+    \includegraphics[width=0.7\textwidth]{img/J-T.pdf}
     \caption{热发射电流密度随温度变化}
     \label{fig:J-T}
 \end{figure}
@@ -105,7 +116,6 @@ $$J = A T^2 e^{-\frac{W}{kT}}$$
 
 在足够强的静电场中, 由于静电场所能提供的能量足够大, 材料中的电子可以克服材料的功函数(减少势垒大小), 更容易逸出材料表面, 从而产生场致发射.
 
-\bibliographystyle{gbt7714-numerical}
 \bibliography{cite.bib}
 
 \end{document}
