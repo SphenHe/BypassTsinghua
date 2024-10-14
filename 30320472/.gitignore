@@ -12,3 +12,8 @@
 */img/OriginalData*.png
 */textbook/*
 */*.pdf
+
+data
+*/code/data_of_crosssec.txt
+*/code/data_of_reactiv.txt
+*/img/*.pdf
