@@ -1,0 +1,48 @@
+0: None
+1: Academy of Arts and Design
+2: Art Center
+3: Department of Electrical Engineering
+4: Department of Engineering Physics
+5: Department of Chemical Engineering
+6: Department of Physical Education
+7: Shenzhen International Graduate School
+8: Global Innovation Exchange Institute
+9: Inistitute for Nuclear Energy and New Energy Technology
+a: Institute of Interdisciplinary Information Sciences
+b: Institute of Advanced Technology
+c: Institute of AI Industry Research
+d: Institute of Biomedical Interdisciplinary Research
+e: Language Center
+f: Laboratory of Low Carbon Energy
+g: PBC School of Finance
+h: Qiuzhen College
+i: Rixin College
+j: School of Architecture
+k: School of Civil Engineering
+l: School of Environment
+m: School of Mechanical Engineering
+n: School of Aerospace Engineering
+o: School of Infomation Science and Technology
+p: School of Sciences
+q: School of Life Sciences
+r: School of Medicine
+s: School of Pharmaceutical Sciences
+t: School of Economics and Management
+u: School of Public Policy and Management
+v: School of Marxism
+w: School of Humanities
+x: School of Social Sciences
+y: School of Law
+z: School of Journalism and Communication
+A: Schwarzman College
+B: Tsinghua Laboratory of Brain and Intelligence
+C: Tsinghua University Research and Conservation Center for Unearthed Texts
+D: The Future Laboratory
+E: Tanwei College
+F: Vanke School of Public Health (SPH)
+G: Weixian College
+H: Weiyang College
+I: Xinya College
+J: Xingjian College
+K: Yau Mathematical Sciences Center
+L: Zhili College

@@ -1,0 +1,6 @@
+CurrentUser=0
+AllGalaTickets=1000
+AllVisitors=1000
+0 0 0 0 0 
+Alnumivisitors=0
+Guestvisitors=0
