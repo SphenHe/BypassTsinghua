@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage[UTF8]{ctex}  % 使用中文支持包
+\usepackage[a4paper, margin=1in]{geometry}  % 设置纸张大小和边距
+\usepackage{anyfontsize}  % 解决字体大小报错问题
+\usepackage{fancyhdr}  % 设置页眉、页脚、页码
+\usepackage{longtable}  % 支持长表格
+
+\usepackage{amsmath}  % 数学公式支持
+\usepackage{cases}  % 支持联立编号
+
+\usepackage{graphicx}  % 插入图片支持
+\usepackage{float}  % 设置图片浮动位置
+\usepackage{subfigure}  % 插入多图时用子图显示
+
+\usepackage{listings}  % 代码块支持
+\usepackage{xcolor}  % 设置代码块颜色
+
+\usepackage[hyphens]{url}  % 支持链接换行
+\usepackage{hyperref}  % 超链接支持
+\usepackage{lastpage}  % 添加lastpage包
+\usepackage{gbt7714}  %国标参考文献
+\bibliographystyle{gbt7714-numerical}
+\hypersetup{
+    hidelinks,
+    colorlinks=true,
+    allcolors=black,
+    pdfstartview=Fit,
+    breaklinks=true
+}
+
+\title{射线源导论-第四讲作业}
+\author{\LaTeX\ by\ Jerry\ }
+\date{\today}
+\pagenumbering{arabic}
+
+\begin{document}
+\pagestyle{fancy}
+
+\fancyhead[L]{Jerry}
+\fancyhead[C]{射线源导论-第四周作业}
+\fancyhead[R]{\today}
+\fancyfoot[C]{Page \thepage/\pageref{LastPage}}
+
+\section*{第四周课程作业}
+
+\subsection*{一、重复Schottky势垒降低的推导过程。计算100 MV/m电场导致的势垒降低。}
+
+对电子而言，假设其距离平面的距离为$x$，取离开平面的方向为$+$，则其受到的电场强度为
+
+$$E(x) = -\frac{e}{4\pi\varepsilon_0(2x)^2} = -\frac{e}{16\pi\varepsilon_0}\cdot\frac{1}{x^2}$$
+
+对应的电势
+
+$$\phi(x) = -\int_x^{\infty} Edx = \frac{e}{16\pi\varepsilon_0}\cdot\frac{1}{x}$$
+
+总的电势能
+
+$$ V(x) = -eE_ax - e\phi(x) = - (eE_a \cdot x + \frac{e^2}{16\pi\varepsilon_0}\cdot\frac{1}{x})$$
+
+可以看出，势能在$x_0 = \sqrt{\frac{\frac{e^2}{16\pi\varepsilon_0}}{eE_a}} = \sqrt{\frac{e}{16\pi\varepsilon_0E_a}}$处有极值，此时的势能为
+
+$$V(x)_{\text{min}} = V(x_0) = -e\sqrt{\frac{eE_a}{4\pi\varepsilon_0}}$$
+
+在 $E = 100\text{MV/m} = 1 \times 10^8 \text{V/m}$ 时，势垒降低为
+
+$$V_x = 0.379\text{eV}$$
+
+\subsection*{二、重复Child-Langmuir的推导过程。计算200 kV、5 cm间距中的流强密度。}
+
+考虑无限大平行阴极和阳极，分别为$0$和$V_0$电位，其间形成了稳态的电流
+
+由 Possion 方程，有 $$ \frac{d^2V}{dz^2} = -\frac{\rho}{\varepsilon_0} $$
+
+电流密度为 $$ J_{CL}(z) = \rho(z) v(z) = -J_{CL} $$
+
+由电荷守恒，有 $$ \frac{\partial\rho}{\partial z} = -\frac{\partial J_{CL}}{\partial z} $$
+
+电子动能 $$ \frac{1}{2}m_ev^2 = eV(z) \rightarrow \rho(z) = \frac{J_{CL}}{\sqrt{2eV/m_e}} $$
+
+故极板间电位分布 $$ \frac{d^2V}{dz^2} = -\frac{J_{CL}}{\varepsilon_0\sqrt{2eV/m_e}} $$
+
+结合边界条件 $V(z = 0) = 0$, $V(z = D) = V_0$，有解 $$V(z) = V_0 \left(\frac{z}{D}\right)^{4/3}$$
+
+代入原方程，解得 $$J_{CL} = \frac{4}{9}\varepsilon_0\sqrt{\frac{2e}{m_e}}\left(\frac{V_0^{3/2}}{D^2}\right)$$
+
+% 对应的 $$\rho(z) = \frac{4}{9}\varepsilon_0\frac{V_0}{D}\left(\frac{D}{z}\right)^{\frac{2}{3}}$$
+
+在200 kV、5 cm间距中，有$ D = 5 \times 10^{-2} \text{m}$，$V_0 = 2 \times 10^5 \text{V}$，代入得到
+
+$$ J_{CL} = 8.35 \times 10^4 \text{A/m}^2 $$
+
+% $$ \rho(z) = 2.136 \times 10^{-6} \frac{1}{z^{2/3}} \text{C/m}^3 $$
+
+\end{document}
