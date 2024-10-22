@@ -66,6 +66,41 @@ $$\tau_H = 0.28 \frac{\varepsilon^{0.74}}{q_*^3} \frac{a^{2.67} k^{3.29} B_0^{3.
 
 \emph{2. 在无中子聚变反应中，聚变能量有潜力以更高的效率转化为电能。根据这个特点，仿照课本中对 D-T 反应堆能量流的描述，草拟一个 D-${}^{3}$He 反应堆能量流的框架示意图，并推导在 D-${}^{3}$He 反应堆中工程增益因子和物理增益因子的关系。}
 
+参考教材图4.10, 如图\ref{fig:frame}所示。
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/frame.png}
+    \caption{D-T 反应堆中能量流的基本框架}
+    \label{fig:frame}
+\end{figure}
+
+由于反应中无中子流失, 故可以直接忽略中子和包层的能量流。对于反应
+
+$$D + {}^{3}He \rightarrow {}^{4}He + p + 18.3 \, MeV$$
+
+产物获得的能量
+
+$$E(\alpha) = \frac{1}{5} Q = 3.66 \, MeV$$, $$E(p) = \frac{4}{5} Q = 14.64 \, MeV$$
+
+体系功率消耗密度
+
+$$S_{h, ext} = S_\kappa+S_B - S_f$$
+
+取$\eta_a$为等离子体吸收的外部加热功率，$\eta_e$为外部输入电功率的转换效率，则
+
+$$P_{in}^{(H)} = \frac{1}{\eta_a\eta_e}S_{h, ext}V$$
+
+设$\eta_1$为输出热转换电功率，则输出热功率为
+
+$$P_{out}^{(H)} = \eta_1(S_\kappa+S_B+\frac{1-\eta_a}{\eta_a}S_{h, ext})V$$
+
+物理增益因子
+
+$$Q = \frac{P_{out}-P_{in}}{P_{in}} = \frac{S_f}{S_\kappa+S_B - S_f}$$
+
+工程增益因子
+
+$$Q = \frac{P_{out}^{(E)}-P_{in}^{(E)}}{P_{in}^{(E)}} = \frac{(\eta_1\eta_e-1)(S_\kappa+S_B)+(1-\eta_1\eta_e(1-\eta_a))S_f}{S_\kappa+S_B - S_f}$$
 
 \end{document}
