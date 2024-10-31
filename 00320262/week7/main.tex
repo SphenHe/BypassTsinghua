@@ -1,0 +1,96 @@
+\documentclass{article}
+\usepackage[UTF8]{ctex}  % 使用中文支持包
+\usepackage[a4paper, margin=1in]{geometry}  % 设置纸张大小和边距
+\usepackage{anyfontsize}  % 解决字体大小报错问题
+\usepackage{fancyhdr}  % 设置页眉、页脚、页码
+\usepackage{longtable}  % 支持长表格
+
+\usepackage{amsmath}  % 数学公式支持
+\usepackage{cases}  % 支持联立编号
+
+\usepackage{graphicx}  % 插入图片支持
+\usepackage{float}  % 设置图片浮动位置
+\usepackage{subfigure}  % 插入多图时用子图显示
+
+\usepackage{listings}  % 代码块支持
+\usepackage{xcolor}  % 设置代码块颜色
+
+\usepackage[hyphens]{url}  % 支持链接换行
+\usepackage{hyperref}  % 超链接支持
+\usepackage{lastpage}  % 添加lastpage包
+\usepackage{gbt7714}  %国标参考文献
+\bibliographystyle{gbt7714-numerical}
+\hypersetup{
+    hidelinks,
+    colorlinks=true,
+    allcolors=black,
+    pdfstartview=Fit,
+    breaklinks=true
+}
+
+\title{射线源导论-第四讲作业}
+\author{\LaTeX\ by\ Jerry\ }
+\date{\today}
+\pagenumbering{arabic}
+
+\begin{document}
+\pagestyle{fancy}
+
+\fancyhead[L]{Jerry}
+\fancyhead[C]{射线源导论-第四周作业}
+\fancyhead[R]{\today}
+\fancyfoot[C]{Page \thepage/\pageref{LastPage}}
+
+\section*{第四周课程作业}
+
+\subsection*{一、对于100 MeV电子，当加速梯度达到多大时，电子能量不在增加（辐射能量等于加速能量）？}
+
+加速度方向与电子运动方向一致，则辐射功率 $$P = \frac{q^2}{6\pi\varepsilon c^3}a^2\gamma^6$$
+
+其中，$P$为辐射功率，$q$为电子电荷，$\varepsilon$为真空介电常数，$c$为真空光速，$a$为加速度，$\gamma$为洛伦兹因子。
+
+加速功率 $$P_0 = qEv $$
+
+电子速度与能量关系 $$E_e = \gamma m c^2 \rightarrow \gamma = \frac{E_e}{mc^2} = \frac{E_e}{E_0} = 195.6947$$
+
+加速度$$ a = \frac{qE}{m} $$
+
+考虑到电子能量较高，可以近似认为$$ v \approx c$$
+
+辐射功率等于加速功率，则 $$\frac{q^2}{6\pi\varepsilon c^3}a^2\gamma^6 = qEv \rightarrow \frac{q^2}{6\pi\varepsilon c^3}\left(\frac{qE}{m}\right)^2\gamma^6 = qEc $$
+
+解得$$E = \frac{6\pi\varepsilon m^2 c^4}{q^3 \gamma^6}$$
+
+代入数值，得到$$ E = 4.84 \times {10}^{6} \text{V/m}$$
+
+\subsection*{二、对于1 GeV电子和质子，以半径30米作圆周运动时，每圈辐射损失多少能量？}
+
+加速度方向与电子运动方向垂直，则辐射功率 $$P = \frac{q^2}{6\pi\varepsilon c^3}a^2\gamma^4$$
+
+其中，$P$为辐射功率，$q$为电子电荷，$\varepsilon$为真空介电常数，$c$为真空光速，$a$为加速度，$\gamma$为洛伦兹因子。
+
+对电子，同理有$$\gamma_e = \frac{E_e}{E_{0, e}} = 1956.947$$
+
+近似有速度 $$ v_e \approx c $$
+
+则运动时间 $$ t_e = \frac{S}{v_e} = \frac{2\pi R}{c} = 6.28 \times {10}^{-7} \text{s}$$
+
+加速度$$ a_e = \frac{v_e^2}{R} = \frac{c^2}{R} $$
+
+损失能量 $$ E_{loss, e} = Pt_e = \frac{q^2}{6\pi\varepsilon c^3}a_e^2\gamma_e^4 t_e $$
+
+代入数值，得到 $$ E_{loss, e} = 4.723 \times {10}^{-16} \text{J} = 2.952 \text{MeV} $$
+
+对于质子，同理有$$\gamma_p = \frac{E_p}{E_0} = 1.066 $$
+
+有速度$$ v_p = c \sqrt{1-\frac{1}{\gamma_p^2}} = 0.3466c = 1.04 \times {10}^{8} \text{m/s} $$
+
+则运动时间 $$t_p = \frac{S}{v_p} = \frac{2\pi R}{v_p} = 1.81 \times {10}^{-6} \text{s}$$
+
+加速度$$ a_p = \frac{v_p^2}{R} = 0.120156 \frac{c^2}{R} $$
+
+损失能量 $$ E_{loss, P} = Pt_p = \frac{q^2}{6\pi\varepsilon c^3}a_p^2\gamma_p^4 t_p $$
+
+代入数值，得到 $$ E_{loss, p} = 1.733 \times {10}^{-30} \text{J} = 1.083 \times 10^{-11} \text{eV} $$
+
+\end{document}

@@ -7,3 +7,4 @@
 1. [第二周作业](week2/main.tex)
 2. [第三周作业](week3/main.tex)
 3. [第四周作业](week4/main.tex)
+4. [第七周作业](week7/main.tex)
