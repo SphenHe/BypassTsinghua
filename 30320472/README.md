@@ -9,3 +9,4 @@
 3. [第三讲作业](week3/main.tex)
 4. [第四讲作业](week5/main.tex)
 5. [第五讲作业](week6/main.tex)
+6. [第六讲作业](week7/main.tex)
