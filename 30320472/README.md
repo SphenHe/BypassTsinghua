@@ -11,3 +11,4 @@
 5. [第五讲作业](week6/main.tex)
 6. [第六讲作业](week7/main.tex)
 7. [第七讲作业](week8/main.tex)
+8. [第八讲作业](week9/main.tex)
