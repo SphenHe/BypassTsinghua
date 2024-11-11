@@ -10,3 +10,4 @@
 4. [第七周作业](week7/main.tex)
 5. [第八周作业](week8/main.tex)
 6. [第一次小测](quiz1/main.tex)
+7. [第九周作业](week9/main.tex)

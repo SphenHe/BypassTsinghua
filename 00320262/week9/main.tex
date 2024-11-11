@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage[UTF8]{ctex}  % 使用中文支持包
+\usepackage[a4paper, margin=1in]{geometry}  % 设置纸张大小和边距
+\usepackage{anyfontsize}  % 解决字体大小报错问题
+\usepackage{fancyhdr}  % 设置页眉、页脚、页码
+\usepackage{longtable}  % 支持长表格
+
+\usepackage{amsmath}  % 数学公式支持
+\usepackage{cases}  % 支持联立编号
+
+\usepackage{graphicx}  % 插入图片支持
+\usepackage{float}  % 设置图片浮动位置
+\usepackage{subfigure}  % 插入多图时用子图显示
+
+\usepackage{listings}  % 代码块支持
+\usepackage{xcolor}  % 设置代码块颜色
+
+\usepackage[hyphens]{url}  % 支持链接换行
+\usepackage{hyperref}  % 超链接支持
+\usepackage{lastpage}  % 添加lastpage包
+\usepackage{gbt7714}  %国标参考文献
+\bibliographystyle{gbt7714-numerical}
+\hypersetup{
+    hidelinks,
+    colorlinks=true,
+    allcolors=black,
+    pdfstartview=Fit,
+    breaklinks=true
+}
+
+\title{射线源导论-第九周作业}
+\author{\LaTeX\ by\ Jerry\ }
+\date{\today}
+\pagenumbering{arabic}
+
+\begin{document}
+\pagestyle{fancy}
+
+\fancyhead[L]{Jerry}
+\fancyhead[C]{射线源导论-第九周作业}
+\fancyhead[R]{\today}
+\fancyfoot[C]{Page \thepage/\pageref{LastPage}}
+
+\section*{第九周课程作业}
+
+\emph{北京高能同步辐射光源（HEPS）是我国正在建设的第四代同步辐射光源，其电子束能量为6GeV，能量排在Spring-8（8GeV）、APS（7GeV）之后，与ESRF（6GeV）并列第三，束流流强$\approx$200mA，预计于2026年建成并交付用户使用。根据不同应用需求，装置将建设90余条光束线和用户实验站供用户使用，其中一期将建设14条光束线供光给不同用户使用，X射线参数通过调整弯铁参数或者波荡器插入件参数进行调整。}
+
+\emph{A） HEPS用于高能X射线辐射的弯铁长度约0.857米，磁场梯度约为1T，偏转半径约为20米，试计算电子束经过该偏转磁铁辐射总功率、辐射射线特征波长}
+
+\emph{B）ID19束线采用波荡器插入件产生辐射，波荡器周期长度$\lambda_u$ = 22.6mm,$K$ = 2.3, 共174个周期，计算经过该波荡器后辐射的X射线波长（基频光），并估算其带宽；}
+
+A.
+
+% 电子束的辐射功率为$$P = \frac{e^2c}{6\pi\varepsilon_0}\left(\frac{E_e}{mc^2}\right)^4\frac{\beta^4}{R^2} = 3.44 \times 10^7 W$$
+
+单个粒子同步辐射总功率$$P_0=\frac{q^2}{6\pi \varepsilon_0 c^3}\alpha^2\gamma^4=\frac{e^2c}{6\pi \varepsilon \rho^2}\beta^4\gamma^4 = 2.19 \times 10^{-6}W$$
+
+辐射射线特征波长 $$\lambda_c=\frac{4 \pi p}{3 \gamma^3}=5.17\times 10^{-11}m$$
+
+B.
+
+$\theta = 0$时，波长$$\lambda_1 = \frac{\lambda u}{2\gamma^2}\left(1+\frac{k^2}{2}\right)=2.9876\times 10^{-10}m$$
+
+带宽$$\Delta \lambda = \lambda\cdot\frac{1}{N}= = 1.717\times 10^{-12}m$$
+
+\end{document}
