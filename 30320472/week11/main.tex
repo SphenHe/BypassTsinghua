@@ -1,0 +1,149 @@
+\documentclass{article}
+\usepackage[UTF8]{ctex}  % 使用中文支持包
+\usepackage[a4paper, margin=1in]{geometry}  % 设置纸张大小和边距
+\usepackage{anyfontsize}  % 解决字体大小报错问题
+\usepackage{fancyhdr}  % 设置页眉、页脚、页码
+\usepackage{longtable}  % 支持长表格
+\usepackage{booktabs} % 用于生成更好的表格
+\usepackage{adjustbox} % 用于调整表格宽度
+
+\usepackage{amsmath}  % 数学公式支持
+\usepackage{cases}  % 支持联立编号
+\usepackage{cite}  % 引用支持
+
+\usepackage{graphicx}  % 插入图片支持
+\usepackage{float}  % 设置图片浮动位置
+\usepackage{subfigure}  % 插入多图时用子图显示
+
+\usepackage{listings}  % 代码块支持
+\usepackage{xcolor}  % 设置代码块颜色
+
+\usepackage[hyphens]{url}  % 支持链接换行
+\usepackage{hyperref}  % 超链接支持
+\usepackage{lastpage}  % 添加lastpage包
+
+\usepackage{gbt7714}  %国标参考文献
+
+\hypersetup{
+    hidelinks,
+    colorlinks=true,
+    allcolors=black,
+    pdfstartview=Fit,
+    breaklinks=true
+}
+
+\title{聚变能源概论-第十讲作业}
+\author{\LaTeX\ by\ Jerry\ }
+\date{\today}
+\pagenumbering{arabic}
+
+\begin{document}
+\pagestyle{fancy}
+
+\fancyhead[L]{Jerry}
+\fancyhead[C]{聚变能源概论-第十讲作业}
+\fancyhead[R]{\today}
+\fancyfoot[C]{Page \thepage/\pageref{LastPage}}
+
+\section*{7.1 欧姆加热功率通常只占等离子体加热功率的很小的一部分，}
+
+\subsection*{(1)计算7.5节给出的典型点火托卡马克运行中从冷等离子体到点火温度的运行过程中欧姆加热功率的变化（可计算其动态演化过程，也可简单计算等离子体温度分别为 100 eV，1 keV，10 keV 的几个典型状态下的欧姆加热功率值）}
+
+由7.5节典型参数：$ B_0 = 5T, \quad a = 2.1m, \quad R = 6.3m, \quad \kappa = 2, \quad I = 17MA, n \sim 1.3 \times 10^{20} \ \text{m}^{-3}, \quad T \sim 7 \text{--} 10 \ \text{keV}, \quad P \sim 40 \ \text{MW} $.
+
+由讲义有$$S_\Omega = \eta j^2,j \approx \frac{B_\varphi}{\mu_0 R},\eta = 5.2 \times 10^{-5} g_{\text{neo}} \frac{Z \ln \Lambda}{T^{3/2}} \ \Omega \cdot m,$$
+
+得欧姆加热功率：$$S_\Omega = 5.2 \times 10^{-5} g_{\text{neo}} \frac{Z \ln \Lambda}{T^{3/2}} j^2.$$
+
+且$$ j = \frac{I}{\kappa \pi a^2} = \frac{1.7 \times 10^7 \ \text{A}}{\kappa \pi (2.1 \ \text{m})^2} \approx 6.14 \times 10^5 \ \text{A/m}^2 $$
+
+取 $ g_{\text{neo}} = 3, \ \ln \Lambda = 20, \ Z = 1.5 $
+
+计算温度为100 eV时的欧姆加热功率
+
+$$S_\Omega = 5.2 \times 10^{-5} \cdot 3 \cdot \frac{1.5 \cdot 20}{(100)^{{3/2}}} \cdot (6.14 \times 10^5)^2 \approx 1.76 \ \text{MW/m}^3.$$
+
+计算温度为1 keV时的欧姆加热功率
+
+$$S_\Omega = 5.2 \times 10^{-5} \cdot 3 \cdot \frac{1.5 \cdot 20}{(1000)^{{3/2}}} \cdot (6.14 \times 10^5)^2 \approx 55.8 \ \text{kW/m}^3.$$
+
+计算温度为10 keV时的欧姆加热功率
+
+$$S_\Omega = 5.2 \times 10^{-5} \cdot 3 \cdot \frac{1.5 \cdot 20}{(10000)^{{3/2}}} \cdot (6.14 \times 10^5)^2 \approx 1.76 \ \text{kW/m}^3.$$
+
+可以看到欧姆加热功率随温度上升迅速下降，难以达到加热功率 $ P \sim 40 \ \text{MW} $ 的要求。
+
+\subsection*{(2) 磁场提高到 $8T$}
+
+其它参数取经典值，由公式 $7.37$ 可以得到：$$a^{2.67} > 107 \frac{q_i^2 T_i^{1.23}}{e^{0.74} \kappa^{3.29} B_0^{3.48} A^{0.61} \epsilon^{0.74}}$$
+
+取 $\epsilon = 1/3$，则尺寸 $a > 1.13m,\ R > 3.39m$。
+
+$$I = \frac{2 \kappa \pi a^2 B_\varphi}{\mu_0 R} \implies I = \frac{2 \kappa \pi a^2 B_\varphi}{q \mu_0 R} \approx 15.07 \, \text{MA}$$
+
+代入密度极限 $7.10$ 得到平均密度：$$n_{20} = \frac{15.07}{\kappa a^2} \implies n \sim 3.76 \times 10^{20} \, \text{m}^{-3},$$
+
+则欧姆加热功率：$$S_\Omega = 5.2 \times 10^{-5} g_{\text{neo}} \frac{Z \ln \Lambda}{T^{3/2}} j^2$$
+
+电流密度：$$j = \frac{B_\varphi}{\mu_0 R} = \frac{8 \, \text{T}}{4\pi \times 10^{-7} \, \text{H/m} \cdot 3.39 \, \text{m}} \approx 1.88 \times 10^6 \, \text{A/m}^2$$
+
+满足限制条件后，则进一步取：$$j = \frac{I}{\kappa \pi a^2} = \frac{1.5 \times 10^7 \, \text{A}}{\kappa \pi (1.13 \, \text{m})^2} \approx 1.87 \times 10^6 \, \text{A/m}^2$$
+
+且$$g_{\text{neo}} = 3, \quad \ln \Lambda = 20, \quad Z = 1.5.$$
+
+计算温度为 $100 \, \text{eV},\ 1 \, \text{keV},\ 10 \, \text{keV}$ 时的欧姆加热功率：
+
+$$S_\Omega = 5.2 \times 10^{-5} \cdot 3 \cdot \frac{1.5 \cdot 20}{(100)^{3/2}} \cdot (1.87 \times 10^6)^2 \approx 16.4 \, \text{MW/m}^3$$
+
+$$S_\Omega = 5.2 \times 10^{-5} \cdot 3 \cdot \frac{1.5 \cdot 20}{(1000)^{3/2}} \cdot (1.87 \times 10^6)^2 \approx 571.5 \, \text{kW/m}^3$$
+
+$$S_\Omega = 5.2 \times 10^{-5} \cdot 3 \cdot \frac{1.5 \cdot 20}{(10000)^{3/2}} \cdot (1.87 \times 10^6)^2 \approx 16.4 \, \text{kW/m}^3$$
+
+\section*{7.2 从新经典输运理论出发，估计一个达到点火条件的托卡马克的尺寸。}
+
+新经典输运条件下
+
+$$\chi_i^{(NC)} = 0.68 q_i^2 \left( \frac{R_0}{r} \right)^{\frac{3}{2}} \chi_i^{(CL)}$$
+
+装置小半径满足：$$a^2 = \chi_i \tau_E = 0.068 q_i^2 \left( \frac{R_0}{r} \right)^{\frac{3}{2}} \frac{n_{20} T_k \tau_E}{B_0^2 T_k^2}$$
+
+考虑点火条件，磁轴处磁场取 $ B = 5 \ \text{T} $，安全因子 $ q > 2 $，环径比为 3，可得：$a > 0.23m$
+
+利用边界安全因子条件可得电流限制：$$\frac{2 \pi a^2 \kappa B_{\phi}}{\mu_0 R I} > 2$$
+
+拉长比取 2 可得：$$I < \frac{\pi a^2 \kappa B_{\phi}}{\mu_0 R} = 1.92MA$$
+
+由 Greenwald 密度极限得：$$n_{20} \leq \frac{I_M}{\pi a^2} = 11.6$$
+
+\section*{7.3 \quad 开放性题目}
+
+\subsection*{(1) 减小托卡马克尺寸所需的科学和技术进展}
+
+\begin{itemize}
+    \item \textbf{等离子体物理学：} 提升等离子体的稳定性与控制能力是实现尺寸减小的核心。开发更高效的技术以抑制等离子体的不稳定性，将有助于减小装置的体积并提高运行效率。
+    \item \textbf{磁体技术：} 磁体是托卡马克的关键部件，用于产生维持强磁场。进一步推进超导磁体技术的发展，可显著减小磁体的体积与重量，从而降低设备整体尺寸和制造成本。
+    \item \textbf{高功率射频加热：} 射频加热是实现等离子体达到高温的重要手段。通过提高射频加热系统的效率和功率输出，可以缩短加热时间并减小所需设备的体积。
+    \item \textbf{等离子体壁面相互作用：} 壁面与等离子体的相互作用会引起能量和粒子的损失。研究壁面材料与涂层技术，以及改善等离子体与壁面的相互作用，有助于减少能量损耗并提升设备性能。
+\end{itemize}
+
+\subsection*{(2) 托卡马克实际尺寸超过估计尺寸的可能原因}
+
+\begin{itemize}
+    \item \textbf{物理研究需求：} 更大的托卡马克尺寸可能用于支持更深入的等离子体物理研究。较大的尺寸能够提供更充足的实验空间和更长的等离子体驻留时间，有利于研究复杂的物理现象并验证理论模型。
+    \item \textbf{工程技术限制：} 在建造过程中，可能因技术挑战或工程需求而增大尺寸。例如，磁体性能、材料强度及高功率射频系统等方面的技术限制，可能需要更大的尺寸以确保安全性和可行性。
+    \item \textbf{实际应用需求：} 如果托卡马克设计用于特定应用（如能量生产或聚变技术验证），其尺寸可能基于实际需求进行调整。某些情况下，增加尺寸可以显著提升设备性能和运行可靠性。
+\end{itemize}
+
+\section*{7.4}
+
+\subsection*{(1) 直接用数据近似计算装置壁面积，大环径比假设下：}
+
+$$S_{\text{壁}} \approx \frac{2 \pi R \times 2 \pi a}{0.8} \approx 652.87\text{m}^2$$
+
+\subsection*{(2) 点火时装置壁承受功率为聚变产生功率（稳态功率平衡），则壁通量密度为：}
+
+$$Q_{\text{壁}} = \frac{P}{S_{\text{壁}}} \approx 0.766 \text{MW/m}^2$$
+
+其中中子携带 $4/5$，等离子体携带 $1/5$。
+
+\end{document}
