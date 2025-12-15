@@ -1,0 +1,536 @@
+\documentclass[11pt]{article}
+
+\usepackage[tbtags]{amsmath}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{import}
+\usepackage{mathrsfs}
+\usepackage{spacing}
+
+\input{gww_defs}
+\input{defs}
+
+\setcounter{psctr}{1} % Pset counter
+
+\begin{document}
+\courseheader
+
+\begin{center}
+  \underline{\bf Problem Set \thepsctr}
+\end{center}
+
+\problem{ }
+% Once upon a time at Tsinghua University in Beijing...
+
+Given Special matrices
+
+\begin{equation*}
+  K_n =
+  \left[
+  \begin{matrix}
+    2 & -1 & 0 & 0 & \cdots & 0 \\
+    -1 & 2 & -1 & 0 & \cdots & 0 \\
+    0 & -1 & 2 & -1 & \cdots & 0 \\
+    \ldots & \ldots & \ldots & \ldots & \ldots & \ldots \\
+    0 & 0 & \cdots & -1 & 2 & -1 \\
+    0 & 0 & \cdots & 0 & -1 & 2
+  \end{matrix}
+  \right]
+\end{equation*}
+
+(a) Compute the $K_nv_i$ for $i = 1, 2, 3$
+
+$v_1 = [\sin t, \cdots, \sin nt]^{T}$
+
+\begin{equation*}
+  K_nv_1 =
+  \left[
+  \begin{matrix}
+    2 \sin t - \sin 2t \\
+    -\sin t + 2 \sin 2t - \sin 3t \\
+    -\sin 2t + 2 \sin 3t - \sin 4t \\
+    \cdots \\
+    -\sin (n-1)t + 2 \sin nt
+  \end{matrix}
+  \right]
+  =
+  \left[
+  \begin{matrix}
+    2 \sin t (1 - \cos t) \\
+    \cdots \\
+    2 \sin(jt) (1 - \cos t) \\
+    \cdots \\
+    -\sin (n-1)t (1 - \cos t)
+  \end{matrix}
+  \right]
+\end{equation*}
+
+$v_2 = [\cos t, \cdots, \cos nt]^{T}$
+
+\begin{equation*}
+  K_nv_2 =
+  \left[
+  \begin{matrix}
+    2 \cos t - \cos 2t \\
+    -\cos t + 2 \cos 2t - \cos 3t \\
+    -\cos 2t + 2 \cos 3t - \cos 4t \\
+    \cdots \\
+    -\cos (n-1)t + 2 \cos nt
+  \end{matrix}
+  \right]
+  =
+  \left[
+  \begin{matrix}
+    2 \cos t (1 - \cos t) \\
+    \cdots\\
+    2 \cos(jt) (1 - \cos t) \\
+    \cdots \\
+    -\cos (n-1)t (1 - \cos t)
+  \end{matrix}
+  \right]
+\end{equation*}
+
+$v_3 = [e^{it}, \cdots, e^{int}]^{T}$
+
+\begin{equation*}
+  K_nv_3 =
+  \left[
+  \begin{matrix}
+    2 e^{it} - e^{2it} \\
+    -e^{it} + 2 e^{2it} - e^{3it} \\
+    -e^{2it} + 2 e^{3it} - e^{4it} \\
+    \cdots \\
+    -e^{(n-1)it} + 2 e^{int}
+  \end{matrix}
+  \right]
+  =
+  \left[
+  \begin{matrix}
+    2 e^{it} (1 - \cos t) \\
+    \cdots \\
+    2 e^{jit} (1 - \cos t) \\
+    \cdots \\
+    2e^{(n-1)it} (1 - \cos t)
+  \end{matrix}
+  \right]
+\end{equation*}
+
+(b) Determine the eigenvectors of $K_n$
+
+Guess the eigen value is $(2-2\cos t)$. Because we can see $K_nv_1 = (2-2\cos t)v_1$, $K_nv_2 = (2-2\cos t)v_2$, $K_nv_3 = (2-2\cos t)v_3$.
+
+Then we can see the eigenvectors are $v_1, v_2, v_3$.
+
+(c) Define a modified matrix $M_n$ by replacing the diagonal entries in $K_n$ with $\sqrt{2}$:
+
+We can find that $M_3$ is not invertible so we can see that $M_n$ is not invertible.
+
+The eigenvectors of $M_n$ are the same as the eigenvectors of $K_n$.(I guess)
+
+\problem{ }
+
+Define a permuation matrix $P_4$ as follows:
+
+\begin{equation*}
+  P_4 =
+  \left[
+  \begin{matrix}
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    1 & 0 & 0 & 0
+  \end{matrix}
+  \right]
+\end{equation*}
+
+(a) Factor $P_4$ as $P_4 = F_4\Gamma_4F_4^{-1}$
+
+\begin{equation*}
+  P_4 - \lambda =
+  \left[
+  \begin{matrix}
+    -\lambda & 1 & 0 & 0 \\
+    0 & -\lambda & 1 & 0 \\
+    0 & 0 & -\lambda & 1 \\
+    1 & 0 & 0 & -\lambda
+  \end{matrix}
+  \right]
+  =
+  0
+\end{equation*}
+
+Solve the equation and we get the eigenvalues are $\lambda = 1, -1, i, -i$, and the eigenvectors are $v_1 = [1, 1, 1, 1]^{T}$, $v_2 = [1, -1, 1, -1]^{T}$, $v_3 = [1, -i, -1, i]^{T}$, $v_4 = [1, i, -1, -i]^{T}$.
+Then we can get the matrix $F_4$ and $\Gamma_4$.
+
+\begin{equation*}
+  F_4 =
+  \left[
+  \begin{matrix}
+    1 & 1 & 1 & 1 \\
+    1 & -1 & -i & i \\
+    1 & 1 & -1 & -1 \\
+    1 & -1 & i & -i
+  \end{matrix}
+  \right]
+\end{equation*}
+
+\begin{equation*}
+  \Gamma_4 =
+  \left[
+  \begin{matrix}
+    1 & 0 & 0 & 0 \\
+    0 & -1 & 0 & 0 \\
+    0 & 0 & i & 0 \\
+    0 & 0 & 0 & -i
+  \end{matrix}
+  \right]
+\end{equation*}
+
+(b) Prove that $C_4 = 2I -P_4 - P_4^3$
+
+\begin{equation*}
+  \begin{aligned}
+    P_4^3 & = F_4\Gamma_4^3F_4^{-1} \\
+    & =
+    \left[
+      \begin{matrix}
+        1 & 1 & 1 & 1 \\
+        1 & -1 & -i & i \\
+        1 & 1 & -1 & -1 \\
+        1 & -1 & i & -i
+      \end{matrix}
+    \right]
+    \left[
+    \begin{matrix}
+      1 & 0 & 0 & 0 \\
+      0 & -1 & 0 & 0 \\
+      0 & 0 & i & 0 \\
+      0 & 0 & 0 & -i
+    \end{matrix}
+    \right]^3
+    \left[
+      \begin{matrix}
+        1 & 1 & 1 & 1 \\
+        1 & -1 & -i & i \\
+        1 & 1 & -1 & -1 \\
+        1 & -1 & i & -i
+      \end{matrix}
+    \right]^{-1} \\
+    & =
+    \left[
+      \begin{matrix}
+        1 & 1 & 1 & 1 \\
+        1 & -1 & -i & i \\
+        1 & 1 & -1 & -1 \\
+        1 & -1 & i & -i
+      \end{matrix}
+    \right]
+    \left[
+    \begin{matrix}
+      1 & 0 & 0 & 0 \\
+      0 & -1 & 0 & 0 \\
+      0 & 0 & -i & 0 \\
+      0 & 0 & 0 & i
+    \end{matrix}
+    \right]
+    \left[
+    \begin{matrix}
+      1 & 1 & 1 & 1 \\
+      1 & -1 & -i & i \\
+      1 & 1 & -1 & -1 \\
+      1 & -1 & i & -i
+    \end{matrix}
+    \right]^{-1} \\
+    & =
+    \left[
+    \begin{matrix}
+      0 & 0 & 0 & 1 \\
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0
+    \end{matrix}
+    \right]
+  \end{aligned}
+\end{equation*}
+
+Then
+
+\begin{equation*}
+  \begin{aligned}
+    P_4 + P_4^3 & =
+    \left[
+    \begin{matrix}
+      0 & 0 & 0 & 1 \\
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0
+    \end{matrix}
+    \right]
+    +
+    \left[
+    \begin{matrix}
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1 \\
+      1 & 0 & 0 & 0
+    \end{matrix}
+    \right] \\
+    & =
+    \left[
+    \begin{matrix}
+      0 & 1 & 0 & 1 \\
+      1 & 0 & 1 & 0 \\
+      0 & 1 & 0 & 1 \\
+      1 & 0 & 1 & 0
+    \end{matrix}
+    \right]
+  \end{aligned}
+\end{equation*}
+
+We know that
+
+\begin{equation*}
+  C_4 =
+  \left[
+  \begin{matrix}
+    2 & -1 & 0 & -1 \\
+    -1 & 2 & -1 & 0 \\
+    0 & -1 & 2 & -1 \\
+    -1 & 0 & -1 & 2
+  \end{matrix}
+  \right]
+\end{equation*}
+
+So we can see that $C_4 = 2I - P_4 - P_4^3$.
+
+(c) Find the eigenvalues and eigenvectors of $C$ using (a) and (b)
+
+We can see that $C_4 = 2I - P_4 - P_4^3 = 2I - F_4\Gamma_4F_4^{-1} - F_4\Gamma_4^3F_4^{-1} = F_4(2I - \Gamma_4 - \Gamma_4^3)F_4^{-1}$.
+
+So the eigenvalues of $C_4$ are
+
+\begin{equation*}
+  \begin{aligned}
+    2 - 1 - 1^3 & = 0 \\
+    2 - (-1) - (-1)^3 & = 4 \\
+    2 - i - i^3 & = 2 \\
+    2 - (-i) - (-i)^3 & = 2
+  \end{aligned}
+\end{equation*}
+
+The eigenvectors are
+
+\begin{equation*}
+  \begin{aligned}
+    v_1 & = [1, 1, 1, 1]^{T} \\
+    v_2 & = [1, -1, 1, -1]^{T} \\
+    v_3 & = [0, 1, 0, -1]^{T} \\
+    v_4 & = [1, 0, -1, 0]^{T}
+  \end{aligned}
+\end{equation*}
+
+Optional:Given c = [c0 , c1 , c2, c3 ], how can you quickly compute the four components of F4 c if you know c0 + c2, c0 - c2 , c1 + c3 , c1 - c3 ?
+
+\begin{equation*}
+  F_4 c =
+  \left[
+    \begin{matrix}
+      c_0+c_1+c_2+c_3 \\
+      c_0+ic_1+i^2c_2+i^3c_3 \\
+      c_0+i^2c_1+i^4c_2+i^6c_3 \\
+      c_0+i^3c_1+i^6c_2+i^9c_3
+    \end{matrix}
+  \right]
+\end{equation*}
+
+We can see that
+
+\begin{equation*}
+  \begin{aligned}
+    F_4 c_0 & = c_0 + c_1 + c_2 + c_3 \\
+    F_4 c_1 & = c_0 - c_1 + ic_2 - ic_3 \\
+    F_4 c_2 & = c_0 + c_1 - c_2 - c_3 \\
+    F_4 c_3 & = c_0 - c_1 - ic_2 + ic_3
+  \end{aligned}
+\end{equation*}
+
+Then we can quickly compute the four components of $F_4 c$ if we know $c_0 + c_2, c_0 - c_2, c_1 + c_3, c_1 - c_3$.
+
+\problem{ }
+
+Define a sum matrixas an upper triangular matrix of ones:
+
+\begin{equation*}
+  S_n =
+  \left[
+  \begin{matrix}
+    1 & 1 & 1 & \cdots & 1 \\
+    0 & 1 & 1 & \cdots & 1 \\
+    0 & 0 & 1 & \cdots & 1 \\
+    \cdots & \cdots & \cdots & \cdots & \cdots \\
+    0 & 0 & 0 & \cdots & 1
+  \end{matrix}
+  \right]
+\end{equation*}
+
+(a) Find the inverse of $S_n$. Explain why the inverse of $S_n$ is a first differernce matrix.
+
+We can see that $S_n$ is a upper triangular matrix, so the inverse of $S_n$ is also a upper triangular matrix.
+
+\begin{equation*}
+  S_n^{-1} =
+  \left[
+  \begin{matrix}
+    1 & -1 & 0 & \cdots & 0 \\
+    0 & 1 & -1 & \cdots & 0 \\
+    0 & 0 & 1 & \cdots & 0 \\
+    \cdots & \cdots & \cdots & \cdots & \cdots \\
+    0 & 0 & 0 & \cdots & 1
+  \end{matrix}
+  \right]
+\end{equation*}
+
+So we can see that the inverse of $S_n$ is a first difference matrix.
+
+When you multiply $S_n^{-1}$ with a vector, you can see that the result is the first difference of the vector. So the inverse of $S_n$ is a first difference matrix.
+
+(b) Prove that $T_n^{-1}=S_nS_n^{T}$
+
+We can see that
+
+\begin{equation*}
+  \begin{aligned}
+    T_n & =
+    \left[
+    \begin{matrix}
+      1 & -1 & 0 & \cdots & 0 \\
+      -1 & 2 & -1 & \cdots & 0 \\
+      0 & -1 & 2 & \cdots & 0 \\
+      \cdots & \cdots & \cdots & \cdots & \cdots \\
+      0 & 0 & 0 & \cdots & -1 \\
+      0 & 0 & 0 & \cdots & 2
+    \end{matrix}
+    \right] \\
+    & = LU \\
+    & = (LU)^T \\
+    & = U^TL^T \\
+    & =
+    \left[
+    \begin{matrix}
+      1 & -1 & 0 & \cdots & 0 \\
+      0 & 1 & -1 & \cdots & 0 \\
+      0 & 0 & 1 & \cdots & 0 \\
+      \cdots & \cdots & \cdots & \cdots & \cdots \\
+      0 & 0 & 0 & \cdots & 1
+    \end{matrix}
+    \right]^T
+    \left[
+      \begin{matrix}
+        1 & 0 & 0 & \cdots & 0 \\
+        -1 & 1 & 0 & \cdots & 0 \\
+        0 & -1 & 1 & \cdots & 0 \\
+        \cdots & \cdots & \cdots & \cdots & \cdots \\
+        0 & 0 & 0 & \cdots & 1
+      \end{matrix}
+    \right]^T \\
+    & = (S_n^T)^{-1}S_n^{-1} \\
+    & = (S_nS_n^T)^{-1}
+  \end{aligned}
+\end{equation*}
+
+Then we can see that $T_n^{-1} = S_nS_n^T$.
+
+
+
+\problem{ }
+
+(a) Find matrix $\Delta_{\_}$ that satisfies $K_{n-1} = \Delta_{\_}^T\Delta_{\_}$ and $B_{n} = \Delta_{\_}\Delta_{\_}^T$(Hint: $\Delta_{\_}$ is a backward difference matrix.)
+
+\begin{equation*}
+  K_{n-1} =
+  \left[
+  \begin{matrix}
+    2 & -1 & 0 & 0 & \cdots & 0 \\
+    -1 & 2 & -1 & 0 & \cdots & 0 \\
+    0 & -1 & 2 & -1 & \cdots & 0 \\
+    \ldots & \ldots & \ldots & \ldots & \ldots & \ldots \\
+    0 & 0 & \cdots & -1 & 2 & -1 \\
+    0 & 0 & \cdots & 0 & -1 & 2
+  \end{matrix}
+  \right]
+\end{equation*}
+
+\begin{equation*}
+  B_n =
+  \left[
+  \begin{matrix}
+    1 & -1 & 0 & 0 & \cdots & 0 \\
+    -1 & 2 & -1 & 0 & \cdots & 0 \\
+    0 & -1 & 2 & -1 & \cdots & 0 \\
+    \ldots & \ldots & \ldots & \ldots & \ldots & \ldots \\
+    0 & 0 & \cdots & -1 & 2 & -1 \\
+    0 & 0 & \cdots & 0 & -1 & 1
+  \end{matrix}
+  \right]
+\end{equation*}
+
+So guess that $\Delta_{\_}$ is a backward difference matrix.
+
+\begin{equation*}
+  \Delta_{\_} =
+  \left[
+  \begin{matrix}
+    1 & 0 & 0 & 0 & \cdots & 0 \\
+    -1 & 1 & 0 & 0 & \cdots & 0 \\
+    0 & -1 & 1 & 0 & \cdots & 0 \\
+    \ldots & \ldots & \ldots & \ldots & \ldots & \ldots \\
+    0 & 0 & \cdots & 0 & -1 & 1 \\
+    0 & 0 & \cdots & 0 & 0 & -1
+  \end{matrix}
+  \right]
+\end{equation*}
+
+Then we can see that $\Delta_{\_}^T\Delta_{\_} = K_{n-1}$ and $\Delta_{\_}\Delta_{\_}^T = B_n$.
+
+(b) Prove that $B_n$ is singular
+
+Then we can see that
+
+\begin{equation*}
+  \begin{aligned}
+    B_n &= LU \\
+    &=
+    \left[
+    \begin{matrix}
+      1 & 0 & 0 & 0 & \cdots & 0 \\
+      -1 & 1 & 0 & 0 & \cdots & 0 \\
+      0 & -1 & 1 & 0 & \cdots & 0 \\
+      \ldots & \ldots & \ldots & \ldots & \ldots & \ldots \\
+      0 & 0 & \cdots & -1 & 1 & 0 \\
+      0 & 0 & \cdots & 0 & -1 & 1
+    \end{matrix}
+    \right]
+    \left[
+    \begin{matrix}
+      1 & -1 & 0 & 0 & \cdots & 0 \\
+      0 & 1 & -1 & 0 & \cdots & 0 \\
+      0 & 0 & 1 & -1 & \cdots & 0 \\
+      \ldots & \ldots & \ldots & \ldots & \ldots & \ldots \\
+      0 & 0 & \cdots & 0 & 1 & -1 \\
+      0 & 0 & \cdots & 0 & 0 & 0
+    \end{matrix}
+    \right] \\
+  \end{aligned}
+\end{equation*}
+
+The $U$ matrix is not a full rank matrix, so the $B_n$ is singular.
+
+(c) What condition should $f$ satisfy for $B_n v = f$ to be solvable?
+
+We can see that $B_n$ is singular, so the $f$ should satisfy that $f$ is in the range of $B_n$. So $f$ should be in the range of $\Delta_{\_}$.
+
+So rank of $f$ should be $n-1$.
+
+So $f$ should satisfy that $\sum_{i=1}^{n} f_i = 0$.
+
+\end{document}

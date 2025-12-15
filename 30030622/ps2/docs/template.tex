@@ -1,0 +1,161 @@
+\documentclass[11pt]{article}
+
+\usepackage[tbtags]{amsmath}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{import}
+\usepackage{mathrsfs}
+\usepackage{spacing}
+
+\input{gww_defs}
+\input{defs}
+
+\setcounter{psctr}{2} % Pset counter
+
+\begin{document}
+\courseheader
+
+\begin{center}
+  \underline{\bf Problem Set \thepsctr}
+\end{center}
+
+\problem{ }
+% Once upon a time at Tsinghua University in Beijing...
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{../output/figures/svd_source.pdf}
+  \caption{SVD of the source image}
+  \label{fig:svd_sources}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{../output/figures/ica_sources.pdf}
+  \caption{ICA of the source image}
+  \label{fig:ica_sources}
+\end{figure}
+
+The audio file can be found at output/audio/ folder.
+
+\problem{ }
+
+The state vector is defined as:
+
+\begin{equation}
+  \mathbf{X}_t =
+  \begin{bmatrix}
+    x_t \\
+    y_t \\
+    z_t \\
+    v_{x,t} \\
+    v_{y,t} \\
+    v_{z,t}
+  \end{bmatrix}
+  \quad \text{(position and velocity)}
+\end{equation}
+
+Assuming the time step is \(\Delta t = 1\), the state transition matrix \(\mathbf{A}\) and the observation matrix \(\mathbf{H}\) are given by:
+
+\begin{equation}
+  \mathbf{A} =
+  \begin{bmatrix}
+    1 & 0 & 0 & 1 & 0 & 0 \\
+    0 & 1 & 0 & 0 & 1 & 0 \\
+    0 & 0 & 1 & 0 & 0 & 1 \\
+    0 & 0 & 0 & 1 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 1
+  \end{bmatrix},
+  \quad
+  \mathbf{H} =
+  \begin{bmatrix}
+    1 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 & 0
+  \end{bmatrix}
+\end{equation}
+
+After constructing the Kalman filter, the graph is made as follows figure \ref{fig:spaceship_trajectory}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1.0\textwidth]{../output/figures/kalman_filter_trajectory.pdf}
+  \caption{3D trajectory of the spaceship}
+  \label{fig:spaceship_trajectory}
+\end{figure}
+
+and the error graph is made as follows figure \ref{fig:kalman_filter_error}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1.0\textwidth]{../output/figures/kalman_filter_error.pdf}
+  \caption{Error of the Kalman filter}
+  \label{fig:kalman_filter_error}
+\end{figure}
+
+\subsection*{Detailed Proof: Kalman Filter is Equivalent to Weighted Least Squares}
+
+\subsubsection*{Problem Formulation Recap}
+We seek the estimated state vector $\hat{x}_t$ that minimizes
+\begin{equation}
+J(x) = \underbrace{(z_t - Hx)^T R^{-1} (z_t - Hx)}_{\text{Observation Error Term}} 
++ \underbrace{(x - A\hat{x}_{t-1})^T P_{\text{pred}}^{-1} (x - A\hat{x}_{t-1})}_{\text{Model Prediction Error Term}}.
+\end{equation}
+This is a least squares problem with two quadratic terms.
+
+\subsubsection*{Solution}
+Differentiate $J(x)$ with respect to $x$ and set the derivative to zero:
+\begin{equation}
+\nabla_x J(x) = -2\,H^T R^{-1} (z_t - Hx) + 2\,P_{\text{pred}}^{-1}(x - A\hat{x}_{t-1}) = 0.
+\end{equation}
+Rearranging the terms:
+\begin{equation}
+H^T R^{-1} H\,x + P_{\text{pred}}^{-1} x = H^T R^{-1} z_t + P_{\text{pred}}^{-1} A\hat{x}_{t-1}.
+\end{equation}
+Combine the terms to obtain:
+\begin{equation}
+\left(H^T R^{-1} H + P_{\text{pred}}^{-1}\right)x = H^T R^{-1} z_t + P_{\text{pred}}^{-1} A\hat{x}_{t-1}.
+\end{equation}
+Thus, the optimal solution is:
+\begin{equation}
+\boxed{
+\hat{x}_t = \left(H^T R^{-1} H + P_{\text{pred}}^{-1}\right)^{-1} \left(H^T R^{-1} z_t + P_{\text{pred}}^{-1} A\hat{x}_{t-1}\right).
+}
+\end{equation}
+
+\subsubsection*{Equivalence to Kalman Update}
+This solution is equivalent to the Kalman update (as can be verified by substitution). By applying the Matrix Inversion Lemma, one obtains the Kalman gain:
+\begin{equation}
+K_t = P_{\text{pred}}\,H^T \left(HP_{\text{pred}}\,H^T + R\right)^{-1},
+\end{equation}
+and the standard Kalman update is then given by:
+\begin{equation}
+\hat{x}_t = x_{\text{pred}} + K_t\,(z_t - H\,x_{\text{pred}}).
+\end{equation}
+
+Therefore, the Kalman Filter is indeed the analytical solution to the above least squares problem.
+
+\problem{ }
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1.0\textwidth]{../output/figures/pde_solutions.pdf}
+  \caption{Solution to the PDE at t = 0.2s}
+  \label{fig:pde_solutions}
+\end{figure}
+
+\begin{table}
+  \centering
+  \begin{tabular}{l p{2cm} p{2cm} p{2cm} p{5cm}}
+  \hline
+  Equation Type & Conservation & Dissipation & Dispersion & Explanation \\
+  \hline
+  $u_t = u_x$ & Yes (L-norm invariant) & No & No & Left-moving wave equation, only translation without change; frequency unchanged \\ \hline
+  $u_t = u_{xx}$ & No & Yes (energy decay) & No & Heat equation: higher frequency terms decay faster, manifesting as a dissipative process \\ \hline
+  $u_t = u_{xxx}$ & Yes & No & Yes (dispersive) & Airy equation is a typical dispersive equation, non-dissipative but different frequencies propagate at different speeds, causing waveform distortion \\ \hline
+  \end{tabular}
+  \caption{Comparison of conservation, dissipation, and dispersion for different equation types}
+\end{table}
+
+\end{document}

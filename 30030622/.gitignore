@@ -1,0 +1,7 @@
+*/*.jpeg
+*/*.jpg
+*/*.png
+*/*.pdf
+venv
+ps*/docs/template.pdf
+ps*/output

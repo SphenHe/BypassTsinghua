@@ -1,0 +1,192 @@
+% GWW DEFINITIONS AND ABBREVIATIONS
+
+% TeX Defs
+
+\usepackage[tbtags]{amsmath} % defines many math commands and
+			     % subequations environment, etc  
+\usepackage{amssymb}  % get, among others, blackboard bold fonts
+                      % defines extra symbols like \gtreqless, etc
+\usepackage{verbatim} % get comment environment, + new verbatim 
+% \usepackage{amsxtra}  % get, eg, \accentedsymbol
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argsup}{arg\,sup}
+\DeclareMathOperator*{\arginf}{arg\,inf}
+\DeclareMathOperator{\erfc}{erfc}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\cum}{cum}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator*{\Dir}{Dir}
+\DeclareMathOperator*{\lms}{l.i.m.\,}
+\newcommand{\varop}[1]{\var\left[{#1}\right]}
+\newcommand{\covop}[2]{\cov\left({#1},{#2}\right)}
+
+\newcommand{\p}{\partial}
+
+\newcommand\Perp{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern3mu{#1#2}}}
+
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern5mu{#1#2}}}
+
+
+% LIST ENVIRONMENTS
+
+\newcounter{actr}
+\newenvironment{alist}%
+{\begin{list}{(\alph{actr})}{\usecounter{actr}}}{\end{list}}
+
+\newcounter{ictr}
+\newenvironment{ilist}%
+{\begin{list}{(\roman{ictr})}{\usecounter{ictr}}}{\end{list}}
+
+\iffalse
+
+% SPACING ENVIRONMENTS 
+
+\newenvironment{singlespace}%
+{\begin{spacing}{1}}{\end{spacing}}
+
+\newenvironment{onehalfspace}% for 11pt font
+{\begin{spacing}{1.21}}{\end{spacing}}
+
+\newenvironment{doublespace}% for 11pt font
+{\begin{spacing}{1.62}}{\end{spacing}}
+
+\fi
+
+% THEOREM ENVIRONMENTS
+
+\newtheorem{thm}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem{corol}{Corollary}
+\newtheorem{prop}{Proposition}
+\newtheorem{defn}{Definition}
+\newenvironment{proof}%
+{\noindent{\em Proof: } \begin{singlespace} \small \noindent}%
+{\noindent\qed \end{singlespace}}
+\newenvironment{new-proof}[1]%
+{{\em Proof of #1: } \begin{singlespace} \small \noindent}%
+{\ \noindent\qed \end{singlespace}}
+
+\newcommand{\abs}[1]{\left|#1\right|}
+%\newcommand{\comb}[2]{{#1\choose#2}}
+\newcommand{\comb}[2]{\binom{#1}{#2}}
+\newcommand{\ie}{i.e.}
+\newcommand{\eg}{e.g.}
+\newcommand{\etc}{etc.}
+\newcommand{\viz}{viz.}
+\newcommand{\etal}{et al.}
+\newcommand{\cf}{cf.}
+
+\newcommand{\vect}[3]{\begin{bmatrix} #1 & #2 & \cdots & #3 \end{bmatrix}^\T}
+
+\newcommand{\dsp}{.5\baselineskip}             % double space amount
+\newcommand{\down}{\vspace{\dsp}}              % double space command
+\newcommand{\ddown}{\vspace{\baselineskip}}    % quadruple space command
+\newcommand{\spec}{\hspace*{1pt}}              % little bit of space
+\newcommand{\ds}{\displaystyle}                % abbreviation
+\newcommand{\ts}{\textstyle}                % abbreviation
+\newcommand{\nin}{\noindent}                   % noindent abbreviation
+\newcommand{\cvar}[1]{\mathrm{var_{#1}\,}}
+\newcommand{\qed}{\rule[0.1ex]{1.4ex}{1.6ex}}
+\newcommand{\mycap}[2]{\caption{\sl #2 \label{#1}}}
+\newcommand{\subcap}[1]{{\begin{center}\sl #1\end{center}}}
+\newcommand{\ditem}[1]{\item[#1 \hspace*{\fill}]}
+\newcommand{\appfig}{\vspace*{1in}\begin{center} Figure appended to
+                       end of manuscript. \end{center} \vspace*{1in}}
+\newcommand{\psx}[1]{\centerline{\epsfxsize=6in \epsfbox{#1}}}
+\newcommand{\psy}[1]{\centerline{\epsfysize=7in \epsfbox{#1}}}
+\newcommand{\psxs}[2]{\centerline{\epsfxsize=#1in \epsfbox{#2}}}
+\newcommand{\psxsbb}[3]{\centerline{\epsfxsize=#1in \epsfbox[#3]{#2}}}
+\newcommand{\psys}[2]{\centerline{\epsfysize=#1in \epsfbox{#2}}}
+\newcommand{\convsamp}[3]{\left.\left\{#1 \ast #2\right\}\right|_{#3}}
+\newcommand{\gap}{\qquad}
+\newcommand{\order}[1]{\mathcal{O}\left(#1\right)}
+\newcommand{\arror}[3]{\begin{cases} #1 & #2 \\ 
+                                     #3 & \text{otherwise} \end{cases}}
+\newcommand{\arrorc}[3]{\begin{cases} #1 & #2 \\ 
+                                     #3 & \text{otherwise,} \end{cases}}
+\newcommand{\arrorp}[3]{\begin{cases} #1 & #2 \\ 
+                                     #3 & \text{otherwise.} \end{cases}}
+\newcommand{\darror}[4]{\begin{cases} #1 & #2 \\ #3 & #4 \end{cases}}
+% \newcommand{\defeq}{\stackrel{\triangle}{=}}
+\newcommand{\defeq}{\stackrel{\Delta}{=}}
+\newcommand{\msconv}{\stackrel{\mathrm{m.s.}}{\longrightarrow}}
+\newcommand{\pwaeconv}{\stackrel{\mathrm{p.w.a.e.}}{\longrightarrow}}
+\newcommand{\peq}{\stackrel{\mathcal{P}}{=}}
+% \newcommand{\glt}{ \begin{array}{c} \Hh=H_1 \\ 
+%  \renewcommand{\arraystretch}{.3} 
+%  \begin{array}{c} > \\ < \end{array}
+%  \renewcommand{\arraystretch}{1} \\ \Hh=H_0 \end{array}}
+
+\hyphenation{or-tho-nor-mal}
+\hyphenation{wave-let wave-lets}
+
+\newcommand{\crb}{Cram\'{e}r-Rao}  % obsolete
+\newcommand{\CR}{Cram\'{e}r-Rao}
+\newcommand{\KL}{Karhunen-Lo\`{e}ve}
+\newcommand{\sE}{\sqrt{E_0}}
+\newcommand{\pe}{\Pr(\eps)}
+\newcommand{\jw}{j\w}
+\newcommand{\ejw}{e^{j\w}}
+\newcommand{\ejv}{e^{j\nu}}
+\newcommand{\wo}{{\w_0}}
+\newcommand{\woh}{{\wh_0}}
+\newcommand{\sumi}[1]{\sum_{#1=-\infty}^{+\infty}}
+\newcommand{\inti}{\int_{-\infty}^{+\infty}}
+\newcommand{\intp}{\int_{-\pi}^{\pi}}
+\newcommand{\nintp}{\frac{1}{2\pi}\int_{-\pi}^{\pi}}
+\newcommand{\inth}{\int_{0}^{\infty}}
+\newcommand{\ev}{\mathbb{E}}
+\newcommand{\E}[1]{\ev\left[{#1}\right]}
+\newcommand{\Ed}[2]{\ev_{#1}\left[{#2}\right]} % Expectation wrt to distr.
+\newcommand{\bigE}[1]{E\bigl[{#1}\bigr]}
+\newcommand{\BigE}[1]{E\Bigl[{#1}\Bigr]}
+\newcommand{\biggE}[1]{E\biggl[{#1}\biggr]}
+\newcommand{\BiggE}[1]{E\Biggl[{#1}\Biggr]}
+\newcommand{\Prob}[1]{\Pr\left[{#1}\right]}
+\newcommand{\Pu}[1]{\Pr\left[{#1}\right]} % obsolete; same as \Prob now
+\newcommand{\Pc}[2]{\Pr\left[{#1}\mid{#2}\right]}  % obsolete
+\newcommand{\Pcb}[2]{\Pr\left[{#1}\Bigm|{#2}\right]} % obsolete
+\newcommand{\Q}[1]{\mathcal{Q}\left({#1}\right)}
+\newcommand{\FT}[1]{\mathcal{F}\left\{{#1}\right\}}
+\newcommand{\LT}[1]{\mathcal{L}\left\{{#1}\right\}}
+\newcommand{\ZT}[1]{\mathcal{Z}\left\{{#1}\right\}}
+%\newcommand{\reals}{\mathbf{R}}
+\newcommand{\reals}{\mathbb{R}}
+%\newcommand{\ints}{\mathbf{Z}}
+\newcommand{\ints}{\mathbb{Z}}
+\newcommand{\compls}{\mathbb{C}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\rats}{\mathbb{Q}}
+\newcommand{\ltwor}{L^2(\reals)}
+\newcommand{\ltwoz}{\ell^2(\ints)}
+\newcommand{\ltwow}{L^2(\Omega)}
+% \newcommand{\ltwo}{\mathbf{L}^2}
+% \newcommand{\ltwor}{\mathbf{L}^2 (\reals)}
+% \newcommand{\ltwoz}{\mathbf{l}^2 (\ints)}
+\newcommand{\sys}[1]{\mathcal{S}\left\{#1\right\}}
+\newcommand{\nn}{\nonumber}
+
+\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
+\newcommand{\di}[2]{d\left({#1},{#2}\right)}
+\newcommand{\ceil}[1]{\lceil{#1}\rceil}
+\newcommand{\floor}[1]{\lfloor{#1}\rfloor}
+\newcommand{\phase}{\measuredangle}
+
+\newcommand{\Ht}{\mathrm{H}}
+\newcommand{\T}{{\mathrm{T}}}
+% \newcommand{\R}{\Re\mathit{e}}
+% \newcommand{\I}{\Im\mathit{m}}
+\DeclareMathOperator{\R}{Re}
+\DeclareMathOperator{\I}{Im}

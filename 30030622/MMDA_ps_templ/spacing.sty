@@ -1,0 +1,49 @@
+% Modified for TeX 3.0, still works with older versions
+\makeatletter
+
+\def\singlespace{\par\vskip\parskip\vskip\baselineskip\def\baselinestretch{1}
+ \def\refbaselinestretch{1}
+ \ifx\@currsize\normalsize\@normalsize\else\@currsize\fi
+ \vskip -\parskip \vskip -\baselineskip}
+\def\endsinglespace{\par}
+
+\def\doublespace{\par\begingroup\def\baselinestretch{2}
+ \def\refbaselinestretch{2}
+ \ifx\@currsize\normalsize\@normalsize\else\@currsize\fi}
+
+\def\enddoublespace{\par\vskip\parskip\vskip\baselineskip\endgroup
+ \vskip -\parskip \vskip -\baselineskip}
+
+\def\triplespace{\par\begingroup\def\baselinestretch{3}
+ \def\refbaselinestretch{3}
+ \ifx\@currsize\normalsize\@normalsize\else\@currsize\fi}
+
+\def\endtriplespace{\par\vskip\parskip\vskip\baselineskip\endgroup
+ \vskip -\parskip \vskip -\baselineskip}
+
+\def\twohalfspace{\par\begingroup\def\baselinestretch{2.5}
+ \def\refbaselinestretch{2.5}
+ \ifx\@currsize\normalsize\@normalsize\else\@currsize\fi}
+
+\def\endtwohalfspace{\par\vskip\parskip\vskip\baselineskip\endgroup
+ \vskip -\parskip \vskip -\baselineskip}
+
+\def\onehalfspace{\par\begingroup\def\baselinestretch{1.5}
+ \def\refbaselinestretch{1.5}
+ \ifx\@currsize\normalsize\@normalsize\else\@currsize\fi}
+
+\def\endonehalfspace{\par\vskip\parskip\vskip\baselineskip\endgroup
+ \vskip -\parskip \vskip -\baselineskip}
+
+\makeatother
+
+\oddsidemargin .25in \evensidemargin .25in \topmargin 0.0in
+\textwidth 6in \textheight 8.5in
+
+\unitlength 1mm	\marginparwidth 82pt \marginparsep 2pt
+
+\newcommand{\fntext}[1]{\footnotetext{\renewcommand{\baselinestretch}{1}\normalsize
+\footnotesize #1}\renewcommand{\baselinestretch}{\refbaselinestretch}\small\normalsize}
+\newcommand{\fn}[1]{\footnotemark\fntext{#1}}
+\newcommand{\sspace}[1]{\renewcommand{\baselinestretch}{1}\small\normalsize #1\renewcommand{\baselinestretch}{\refbaselinestretch}\small\normalsize}
+
