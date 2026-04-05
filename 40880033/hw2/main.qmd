@@ -1,0 +1,110 @@
+---
+title: "生物统计和生物信息导论 第 2 次作业"
+author: "何宇峰"
+date: today
+output:
+  pdf_document:
+    latex_engine: xelatex
+CJKmainfont: "SimSun"
+---
+
+Hearing that I will get bonus points if I use GitHub to submit my homework, so you may find my homework in this link: <https://github.com/SphenHe/BypassTsinghua/tree/master/40880033/>
+
+## Problem 1: Confounding in Real-World Causal Questions
+
+**Causal question:** Does carrying an umbrella cause the streets to become wet?
+
+**Treatment / exposure variable A:** Whether people carry umbrellas
+
+**Outcome variable Y:**\
+Whether the streets are wet
+
+**Confounder C:**\
+Rain
+
+**Why C is a confounder:**\
+Rain affects both variables. When it rains, people are more likely to carry umbrellas, and the streets are also more likely to become wet. So rain influences both A and Y.
+
+**What misleading conclusion might arise if C is ignored:**\
+If rain is ignored, one might observe that umbrella-carrying is associated with wet streets and incorrectly conclude that carrying umbrellas causes the streets to become wet. In reality, rain is the true cause of both.
+
+## Problem 2: Constructing an Example Based on a DAG
+
+I will use the DAG on slide 51.
+
+**Real-world example**
+
+Suppose we are interested in the question: Does attending a test-preparation course improve a student’s exam score?
+
+**Variables in the DAG**
+
+-   A: attending a test-preparation course
+
+-   Y: final exam score
+
+-   X: family educational support
+
+-   Z: the student’s prior academic ability
+
+-   W: the student’s study effort before the exam
+
+**Causal relationships indicated by the arrows**
+
+-   X-\>Z: Family educational support affects the student’s prior academic ability. Students from more supportive families often develop a stronger academic foundation.
+
+-   X-\>A: Family support also affects whether the student attends a test-preparation course, since supportive families are more likely to pay for or encourage extra tutoring.
+
+-   Z-\>A: Prior academic ability influences attendance in the course. For example, weaker students may seek extra help, while strong students may also enroll to maximize their scores.
+
+-   Z-\>W: Prior ability affects study effort. Students with stronger foundations may study more effectively or be more motivated to prepare.
+
+-   W-\>Y: Study effort directly affects exam score. More preparation usually leads to better performance.
+
+-   A-\>Y: Attending the test-preparation course may directly improve the exam score by providing instruction, practice, and test-taking strategies.
+
+## Problem 3: Reading a Classical Paper on Observational Studies
+
+**1. Why can direct comparisons between treated and control groups be misleading in observational studies? Explain the role of confounding variables.**
+
+In observational studies, treatment is not randomly assigned, so treated and control units may differ systematically before treatment. Those pre-treatment differences can affect the outcome, making a simple comparison of outcomes misleading. Confounding variables are variables related to both treatment assignment and the outcome; if they are imbalanced across groups, part of the observed treated-control difference may reflect confounding rather than a true causal effect.
+
+**2. What is the definition of the propensity score? Explain its meaning in your own words.**
+
+The propensity score is the conditional probability of receiving treatment given the observed covariates:
+
+$$
+e(x) = \Pr(Z=1 \mid X=x)
+$$
+
+In plain words, it is each unit’s predicted chance of being treated, based only on the observed background characteristics. It summarizes many covariates into one number that reflects how likely someone was to receive the treatment.
+
+**3. According to the papers, why can adjusting for the propensity score help reduce bias in estimating causal effects?**
+
+The key result is that the propensity score is a balancing score: within groups of units with the same propensity score, the distribution of observed covariates is the same for treated and control units. The 1983 paper also shows that if treatment assignment is strongly ignorable given the observed covariates, then it is also strongly ignorable given any balancing score, including the propensity score. Therefore, adjusting for the scalar propensity score can remove bias due to all observed covariates, instead of adjusting for each covariate separately.
+
+**4. The 1983 paper discusses several approaches that use the propensity score in practice. Name two such approaches and briefly describe the main idea behind each of them.**
+
+Two approaches are:
+
+-   Matched sampling on the propensity score: treated units are matched to control units with similar propensity scores, so the matched groups have more similar observed covariates.\
+-   Subclassification on the propensity score: units are divided into strata or subclasses based on their propensity scores, and treatment effects are compared within those subclasses and then combined.
+
+The 1983 paper also mentions covariance adjustment and a visual two-dimensional representation of multivariate adjustment.
+
+**5. The 1984 paper estimates the propensity score using a logistic regression model. Explain why logistic regression is a natural choice for estimating propensity scores.**
+
+Logistic regression is a natural choice because the treatment indicator is binary, and the propensity score is a conditional probability between 0 and 1. The 1984 paper models $$
+\log\left(\frac{e(x)}{1-e(x)}\right)=\alpha+\beta^T f(x)
+$$ which directly links covariates to the probability of treatment assignment. So logistic regression provides a straightforward way to estimate each subject’s probability of treatment from observed covariates.
+
+**6. Both papers discuss stratification based on the propensity score. How does stratification based on the propensity score differ from stratification directly on multiple covariates? Why can the propensity score approach be more practical in observational studies?**
+
+Direct stratification on many covariates quickly becomes impractical because the number of subclasses grows exponentially with the number of covariates. The 1984 paper notes that with (p) binary covariates, there are (2\^p) subclasses, so many subclasses will be empty or contain only treated or only control units. By contrast, stratification on the propensity score uses a single scalar summary of the covariates, which can balance all observed covariates while requiring far fewer strata. That is why it is much more practical when there are many covariates.
+
+**7. The 1984 paper uses five subclasses based on the propensity score. According to the authors, approximately how much bias reduction can this approach typically achieve?**
+
+The authors state that five subclasses are often sufficient to remove over 90% of the bias due to the covariates.
+
+**8. Can propensity score methods remove bias caused by unobserved confounders? Briefly explain why or why not.**
+
+No, not in general. Both papers emphasize that propensity score methods can balance only the observed covariates used in the model. If there are unmeasured variables that affect both treatment assignment and outcomes, bias may still remain. The 1984 paper explicitly says subclassification on an estimated propensity score cannot, like randomization, balance unobserved covariates except to the extent that they are correlated with observed ones.
